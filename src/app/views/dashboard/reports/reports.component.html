@@ -1,1 +1,40 @@
-<p>reports works!</p>
+<div class="">
+    <div class="breadcrumb">
+      <h1>الملفات المرفوعة</h1>
+      <ul>
+        <li><a href="">الوقت الاضافي</a></li>
+        <li>الملفات المرفوعة</li>
+      </ul>
+    </div>
+  </div>
+  <hr />
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                       <tr>
+                        <th>التاريخ</th>
+                        <th>عدد الموظفين</th>
+                        <th>عدد الساعات</th>
+                        <th>الاجراءات</th>
+                       </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let file of files">
+                            <td>{{file.year}} - {{file.month}}</td>
+                            <td>{{file.totalEmployee}}</td>
+                            <td>{{file.totalHours}}</td>
+                            <td>
+                                <a class="btn btn-primary" href="https://{{file.attachment}}">
+                                    تحميل الملف
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

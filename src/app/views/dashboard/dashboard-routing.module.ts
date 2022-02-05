@@ -21,22 +21,22 @@ const routes: Routes = [
     path: 'reports',
     component: ReportsComponent
   },
-  {
-    path: 'v1',
-    component: DashboadDefaultComponent
-  },
-  {
-    path: 'v2',
-    component: DashboardV2Component
-  },
-  {
-    path: 'v3',
-    component: DashboardV3Component
-  },
-  {
-    path: 'v4',
-    component: DashboardV4Component
-  }
+  // {
+  //   path: 'v1',
+  //   component: DashboadDefaultComponent
+  // },
+  // {
+  //   path: 'v2',
+  //   component: DashboardV2Component
+  // },
+  // {
+  //   path: 'v3',
+  //   component: DashboardV3Component
+  // },
+  // {
+  //   path: 'v4',
+  //   component: DashboardV4Component
+  // }
 ];
 
 @NgModule({

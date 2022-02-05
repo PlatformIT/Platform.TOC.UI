@@ -1,4 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: "Cairo";
+    src: url(./assets/styles/fonts/Cairo-Regular.ttf) format("truetype");
+    /* font-display: swap; */
+  }
 *{
-    font-family:"cairo" !important
+    font-family:"Cairo" !important
 }

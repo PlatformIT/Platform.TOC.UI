@@ -12,4 +12,13 @@ export class UploadFileService {
   uploadFile(data){
     return this.htpp.post(this.baseUrl + "Overtime", data)
   }
+  getBymonth(data){
+    return this.htpp.get(this.baseUrl + `Employee/GetByMonth?month=${data.month}&year=${data.year}`)
+  }
+  getEmployeeById(employeeId){
+    return this.htpp.get(this.baseUrl + `Employee/GetByEmployeeId?employeeId=${employeeId}`)
+  }
+  getAllReports(){
+    return this.htpp.get(this.baseUrl + `Overtime/GetAllReport`)
+  }
 }

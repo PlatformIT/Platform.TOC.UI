@@ -56,7 +56,7 @@ const adminRoutes: Routes = [
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard/v1',
+    redirectTo: 'dashboard/uploadfile',
     pathMatch: 'full'
   },
   {
@@ -92,7 +92,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true, relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes, { useHash: false, relativeLinkResolution: 'legacy' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

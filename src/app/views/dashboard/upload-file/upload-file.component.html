@@ -9,25 +9,25 @@
 </div>
 <hr />
 <div class="row">
-<div class="col-md-12">
-    <div class="alert alert-info">يرجى ملىء جميع الحقول </div>
-</div>
+  <div class="col-md-12">
+    <div class="alert alert-info">يرجى ملىء جميع الحقول</div>
+  </div>
   <div class="col-md-12">
     <div class="card">
       <div class="card-body">
         <form [formGroup]="uploadFileForm" (ngSubmit)="uploadFile()">
           <div class="row">
             <div class="col-md-1 d-flex align-items-end">
-                <button
-                  type="button"
-                  class="btn btn-info"
-                  (click)="open(holidaysModel)"
-                >
-                  اضافة ايام العطل
-                </button>
-                <!-- <label>ايام العطل</label>
+              <button
+                type="button"
+                class="btn btn-info"
+                (click)="open(holidaysModel)"
+              >
+                اضافة ايام العطل
+              </button>
+              <!-- <label>ايام العطل</label>
                               <input class="form-control" type="date"> -->
-              </div>
+            </div>
             <div class="col-md-1">
               <label>اختر الشهر</label>
               <select formControlName="month" class="form-control">
@@ -56,19 +56,37 @@
             </div>
             <div class="col-md-2">
               <label>وقت الدخول</label>
-              <input formControlName="startTime" class="form-control" type="time" />
+              <input
+                formControlName="startTime"
+                class="form-control"
+                type="time"
+              />
             </div>
             <div class="col-md-2">
               <label>وقت الخروج</label>
-              <input formControlName="endTime" class="form-control" type="time" />
+              <input
+                formControlName="endTime"
+                class="form-control"
+                type="time"
+              />
             </div>
-           
+
             <div class="col-md-2">
               <label>اختر الفايل</label>
-              <input (change)="uploadFileBtn($event)" formControlName="file" class="form-control" type="file" />
+              <input
+                (change)="uploadFileBtn($event)"
+                formControlName="file"
+                class="form-control"
+                type="file"
+              />
             </div>
             <div class="col-md-1 d-flex align-items-end">
-                <button [disabled]="uploadFileForm.invalid" class="btn btn-primary">رفع</button>
+              <button
+                [disabled]="uploadFileForm.invalid"
+                class="btn btn-primary"
+              >
+                رفع
+              </button>
             </div>
           </div>
         </form>
@@ -77,28 +95,32 @@
   </div>
   <div class="col-md-12">
     <div class="card mt-3">
-        <div class="card-body">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>الرقم الوظيفي</th>
-                        <th>الاسم</th>
-                        <th>التاريخ</th>
-                        <th>الساعات الاضافية</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let employee of employees">
-                        <td>{{employee?.id}}</td>
-                        <td>{{employee?.employeeId}}</td>
-                        <td>{{employee?.name}}</td>
-                        <td>{{employee?.year}} - {{employee?.month}}</td>
-                        <td>{{employee?.overTime}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>الرقم الوظيفي</th>
+              <th>الاسم</th>
+              <th>التاريخ</th>
+              <th>الساعات الاضافية</th>
+              <th>الاجراءات</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let employee of employees">
+              <td>{{ employee?.id }}</td>
+              <td>{{ employee?.employeeId }}</td>
+              <td>{{ employee?.name }}</td>
+              <td>{{ employee?.year }} - {{ employee?.month }}</td>
+              <td>{{ employee?.overTime }}</td>
+              <td>
+                <button class="btn btn-info">التفاصيل</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
@@ -150,7 +172,9 @@
           <td>{{ i + 1 }}</td>
           <td>{{ day }}</td>
           <td>
-              <button (click)="deleteDayFromHoliday(i)" class="btn btn-danger">حذف</button>
+            <button (click)="deleteDayFromHoliday(i)" class="btn btn-danger">
+              حذف
+            </button>
           </td>
         </tr>
       </tbody>
