@@ -10,6 +10,10 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardV3Component } from './dashboard-v3/dashboard-v3.component';
 import { DashboardV4Component } from './dashboard-v4/dashboard-v4.component';
+import { UploadFileComponent } from './upload-file/upload-file.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GetByMonthComponent } from './get-by-month/get-by-month.component';
+import { ReportsComponent } from './reports/reports.component';
 
 @NgModule({
   imports: [
@@ -18,8 +22,10 @@ import { DashboardV4Component } from './dashboard-v4/dashboard-v4.component';
     NgxEchartsModule,
     NgxDatatableModule,
     NgbModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  declarations: [DashboadDefaultComponent, DashboardV2Component, DashboardV3Component, DashboardV4Component]
+  declarations: [DashboadDefaultComponent, DashboardV2Component, DashboardV3Component, DashboardV4Component, UploadFileComponent, GetByMonthComponent, ReportsComponent]
 })
 export class DashboardModule { }

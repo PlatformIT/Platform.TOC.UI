@@ -1,0 +1,168 @@
+<div class="">
+  <div class="breadcrumb">
+    <h1>رفع فايل</h1>
+    <ul>
+      <li><a href="">الوقت الاضافي</a></li>
+      <li>رفع فايل</li>
+    </ul>
+  </div>
+</div>
+<hr />
+<div class="row">
+<div class="col-md-12">
+    <div class="alert alert-info">يرجى ملىء جميع الحقول </div>
+</div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="uploadFileForm" (ngSubmit)="uploadFile()">
+          <div class="row">
+            <div class="col-md-1 d-flex align-items-end">
+                <button
+                  type="button"
+                  class="btn btn-info"
+                  (click)="open(holidaysModel)"
+                >
+                  اضافة ايام العطل
+                </button>
+                <!-- <label>ايام العطل</label>
+                              <input class="form-control" type="date"> -->
+              </div>
+            <div class="col-md-1">
+              <label>اختر الشهر</label>
+              <select formControlName="month" class="form-control">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+              </select>
+            </div>
+            <div class="col-md-1">
+              <label>اختر السنة</label>
+              <select formControlName="year" class="form-control">
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option selected value="2022">2022</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label>وقت الدخول</label>
+              <input formControlName="startTime" class="form-control" type="time" />
+            </div>
+            <div class="col-md-2">
+              <label>وقت الخروج</label>
+              <input formControlName="endTime" class="form-control" type="time" />
+            </div>
+           
+            <div class="col-md-2">
+              <label>اختر الفايل</label>
+              <input (change)="uploadFileBtn($event)" formControlName="file" class="form-control" type="file" />
+            </div>
+            <div class="col-md-1 d-flex align-items-end">
+                <button [disabled]="uploadFileForm.invalid" class="btn btn-primary">رفع</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="card mt-3">
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>الرقم الوظيفي</th>
+                        <th>الاسم</th>
+                        <th>التاريخ</th>
+                        <th>الساعات الاضافية</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let employee of employees">
+                        <td>{{employee?.id}}</td>
+                        <td>{{employee?.employeeId}}</td>
+                        <td>{{employee?.name}}</td>
+                        <td>{{employee?.year}} - {{employee?.month}}</td>
+                        <td>{{employee?.overTime}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #holidaysModel let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Modal Basic</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="picker1">اختر اليوم</label>
+        <div class="input-group">
+          <input
+            #holidaysInput
+            id="picker1"
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            type="date"
+          />
+          <button
+            class="btn btn-primary"
+            type="button"
+            (click)="addHoliday(holidaysInput.value)"
+          >
+            اضافة
+          </button>
+        </div>
+      </div>
+    </form>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ت</th>
+          <th>التاريخ</th>
+          <th>الاجراءات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let day of hodidaysSelected; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ day }}</td>
+          <td>
+              <button (click)="deleteDayFromHoliday(i)" class="btn btn-danger">حذف</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.close('Save click')"
+    >
+      اغلاق
+    </button>
+  </div>
+</ng-template>
