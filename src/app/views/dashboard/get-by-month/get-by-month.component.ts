@@ -20,6 +20,7 @@ export class GetByMonthComponent implements OnInit {
     })
   }
   search(){
+      this.employees = []
     this.uploadFileService.getBymonth(this.searchForm.value).subscribe((res:any) => {
       console.log(res);
       this.employees = res.data

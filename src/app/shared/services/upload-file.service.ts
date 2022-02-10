@@ -21,4 +21,7 @@ export class UploadFileService {
   getAllReports(){
     return this.htpp.get(this.baseUrl + `Overtime/GetAllReport`)
   }
+  deleteFile(data){
+    return this.htpp.delete(this.baseUrl + `Overtime?month=${data.month}&year=${data.year}`)
+  }
 }

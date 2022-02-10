@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { UploadFileService } from 'src/app/shared/services/upload-file.service';
 
 @Component({
@@ -13,19 +14,24 @@ export class UploadFileComponent implements OnInit {
   uploadFileForm: FormGroup;
   fileData: any;
   employees: any;
+  nowDate = new Date(Date.now());
   constructor(
     private fb: FormBuilder,
     private modalService: NgbModal,
-    private uploadFileService: UploadFileService
+    private uploadFileService: UploadFileService,
+    private toastr: ToastrService
     
     ) { }
 
   ngOnInit(): void {
+    console.log('====================================');
+    console.log(this.nowDate.getMonth() + 1);
+    console.log('====================================');
     this.uploadFileForm = this.fb.group({
-      month: ['', Validators.required],
-      year: ['', Validators.required],
-      startTime: ['', Validators.required],
-      endTime: ['', Validators.required],
+      month: [this.nowDate.getMonth() + 1, Validators.required],
+      year: [this.nowDate.getFullYear(), Validators.required],
+      startTime: ['07:45', Validators.required],
+      endTime: ['14:20', Validators.required],
       file: ['', Validators.required],
 
     })
@@ -64,6 +70,14 @@ export class UploadFileComponent implements OnInit {
     this.uploadFileService.uploadFile(fromData).subscribe((res:any) => {
       console.log(res);
       this.employees = res.data
+      this.toastr.success("تم رفع الملف")
+    }, (err:any) => {
+      if(err.error.errorCode == 1){
+        this.toastr.error("مرفوع فايل مسبقاً","لم يتم رفع الملف")
+      }
+      else{
+        this.toastr.error("لم يتم رفع الملف")
+      }
     })
   }
   

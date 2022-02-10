@@ -17,17 +17,7 @@
       <div class="card-body">
         <form [formGroup]="uploadFileForm" (ngSubmit)="uploadFile()">
           <div class="row">
-            <div class="col-md-1 d-flex align-items-end">
-              <button
-                type="button"
-                class="btn btn-info"
-                (click)="open(holidaysModel)"
-              >
-                اضافة ايام العطل
-              </button>
-              <!-- <label>ايام العطل</label>
-                              <input class="form-control" type="date"> -->
-            </div>
+           
             <div class="col-md-1">
               <label>اختر الشهر</label>
               <select formControlName="month" class="form-control">
@@ -79,6 +69,15 @@
                 class="form-control"
                 type="file"
               />
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+              <button
+                type="button"
+                class="btn btn-info"
+                (click)="open(holidaysModel)"
+              >
+                اضافة ايام العطل
+              </button>
             </div>
             <div class="col-md-1 d-flex align-items-end">
               <button

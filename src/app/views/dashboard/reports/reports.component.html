@@ -18,6 +18,8 @@
                         <th>التاريخ</th>
                         <th>عدد الموظفين</th>
                         <th>عدد الساعات</th>
+                        <th>وقت الدخول</th>
+                        <th>وقت الخروج</th>
                         <th>الاجراءات</th>
                        </tr>
                     </thead>
@@ -26,8 +28,11 @@
                             <td>{{file.year}} - {{file.month}}</td>
                             <td>{{file.totalEmployee}}</td>
                             <td>{{file.totalHours}}</td>
+                            <td>{{file.startTime}}</td>
+                            <td>{{file.endTime}}</td>
                             <td>
-                                <a class="btn btn-primary" href="https://{{file.attachment}}">
+                                <button class="btn btn-danger" (click)="deleteFile(file)">حذف الملف</button>
+                                <a class="btn btn-primary mx-1" href="https://{{file.attachment}}">
                                     تحميل الملف
                                 </a>
                             </td>

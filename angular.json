@@ -36,6 +36,7 @@
               "src/assets", "src/web.config"
             ],
             "styles": [
+              "node_modules/ngx-spinner/animations/timer.css",
               "src/assets/styles/app/_app.scss",
               "src/styles.css"
             ],
