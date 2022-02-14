@@ -17,7 +17,6 @@
       <div class="card-body">
         <form [formGroup]="uploadFileForm" (ngSubmit)="uploadFile()">
           <div class="row">
-           
             <div class="col-md-1">
               <label>اختر الشهر</label>
               <select formControlName="month" class="form-control">
@@ -45,20 +44,19 @@
               </select>
             </div>
             <div class="col-md-2">
-              <label>وقت الدخول</label>
-              <input
-                formControlName="startTime"
-                class="form-control"
-                type="time"
-              />
-            </div>
-            <div class="col-md-2">
-              <label>وقت الخروج</label>
-              <input
-                formControlName="endTime"
-                class="form-control"
-                type="time"
-              />
+              <label>وقت الدخول - وقت الخروج</label>
+              <div class="input-group">
+                <input
+                  formControlName="startTime"
+                  class="form-control"
+                  type="time"
+                />
+                <input
+                  formControlName="endTime"
+                  class="form-control"
+                  type="time"
+                />
+              </div>
             </div>
 
             <div class="col-md-2">
@@ -70,18 +68,27 @@
                 type="file"
               />
             </div>
-            <div class="col-md-2 d-flex align-items-end">
+            <div class="col-md-1 d-flex align-items-end">
               <button
                 type="button"
                 class="btn btn-info"
                 (click)="open(holidaysModel)"
               >
-                اضافة ايام العطل
+              اضافة ايام العطل
+              </button>
+            </div>
+            <div class="col-md-2 d-flex align-items-end mx-3">
+              <button
+                type="button"
+                class="btn btn-info"
+                (click)="open(blockedEmployee)"
+              >
+               
+                اضافة غير المشمولين
               </button>
             </div>
             <div class="col-md-1 d-flex align-items-end">
               <button
-                [disabled]="uploadFileForm.invalid"
                 class="btn btn-primary"
               >
                 رفع
@@ -172,6 +179,72 @@
           <td>{{ day }}</td>
           <td>
             <button (click)="deleteDayFromHoliday(i)" class="btn btn-danger">
+              حذف
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.close('Save click')"
+    >
+      اغلاق
+    </button>
+  </div>
+</ng-template>
+
+
+<ng-template #blockedEmployee let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">الموظفين غير المشمولين</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="picker2">ادخل الرقم الوظيفي</label>
+        <div class="input-group">
+          <input
+            #accountNumber
+            id="picker2"
+            class="form-control"
+            type="text"
+          />
+          <button
+            class="btn btn-primary"
+            type="button"
+            (click)="addBlockedEmployee(accountNumber.value);accountNumber.value = ''"
+          >
+            اضافة
+          </button>
+        </div>
+      </div>
+    </form>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ت</th>
+          <th>الرقم الوظيفي</th>
+          <th>الاجراءات</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let accountNumber of blockedEployees; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ accountNumber }}</td>
+          <td>
+            <button (click)="deleteBlockedEployees(i)" class="btn btn-danger">
               حذف
             </button>
           </td>
