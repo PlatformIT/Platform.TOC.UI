@@ -24,4 +24,11 @@ export class UploadFileService {
   deleteFile(data){
     return this.htpp.delete(this.baseUrl + `Overtime?month=${data.month}&year=${data.year}`)
   }
+
+  getAssignmentsFile(data){
+    return this.htpp.get(this.baseUrl + `Report/GetAssignments?month=${data.month}&year=${data.year}`, { responseType: "blob" })
+  }
+  getContractsFile(data){
+    return this.htpp.get(this.baseUrl + `Report/GetContracts?month=${data.month}&year=${data.year}`, { responseType: "blob" })
+  }
 }

@@ -16,6 +16,7 @@ export class UploadFileComponent implements OnInit {
   employees: any;
   nowDate = new Date(Date.now());
   blockedEployees: any = [];
+  data: any = {};
   constructor(
     private fb: FormBuilder,
     private modalService: NgbModal,
@@ -66,10 +67,17 @@ export class UploadFileComponent implements OnInit {
     const fromData = new FormData();
     this.hodidaysSelected.forEach((day) => {
       fromData.append("Holidays", day);
-    }),
-    this.blockedEployees.forEach((acoount) => {
-      fromData.append("EmployeeIds", acoount);
-    }),
+    });
+
+    if (this.data.morningOverTimeForAll) {
+      fromData.append("EmployeeIds", "");
+      fromData.append("MorningOverTimeForAll", this.data.morningOverTimeForAll);
+    } else {
+      this.blockedEployees.forEach((acoount) => {
+        fromData.append("EmployeeIds", acoount);
+      });
+      fromData.append("MorningOverTimeForAll", this.data.morningOverTimeForAll);
+    }
     fromData.append("month", this.uploadFileForm.get("month").value);
     fromData.append("year", this.uploadFileForm.get("year").value);
     fromData.append("startTime", this.uploadFileForm.get("startTime").value);
@@ -86,7 +94,7 @@ export class UploadFileComponent implements OnInit {
         if (err.error.errorCode == 1) {
           this.toastr.error("مرفوع فايل مسبقاً", "لم يتم رفع الملف");
         } else {
-          this.toastr.error("لم يتم رفع الملف");
+          this.toastr.error("لم يتم رفع الملف", err.error.message);
         }
       }
     );

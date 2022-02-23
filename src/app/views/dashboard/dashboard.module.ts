@@ -14,6 +14,7 @@ import { UploadFileComponent } from './upload-file/upload-file.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GetByMonthComponent } from './get-by-month/get-by-month.component';
 import { ReportsComponent } from './reports/reports.component';
+import { PrintComponent } from './print/print.component';
 
 @NgModule({
   imports: [
@@ -26,6 +27,6 @@ import { ReportsComponent } from './reports/reports.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [DashboadDefaultComponent, DashboardV2Component, DashboardV3Component, DashboardV4Component, UploadFileComponent, GetByMonthComponent, ReportsComponent]
+  declarations: [DashboadDefaultComponent, DashboardV2Component, DashboardV3Component, DashboardV4Component, UploadFileComponent, GetByMonthComponent, ReportsComponent, PrintComponent]
 })
 export class DashboardModule { }

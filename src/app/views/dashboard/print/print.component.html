@@ -1,0 +1,44 @@
+<!-- <button class="btn btn-outline-primary mx-1" (click)="printMenu(1)">
+    طباعة الدائمين
+  </button>
+  <button class="btn btn-outline-primary mx-1" (click)="printMenu(2)">
+    طباعة العقود
+  </button> -->
+  <div id="empolyee" style="display: none">
+    <table class="table table-striped w-100">
+        <thead>
+            <tr>
+                <th>الرقم الوظيفي</th>
+                <th>الاسم الكامل</th>
+                <th>التاريخ</th>
+                <th>الساعات الاضافية</th>
+                <th>نوع الموظف</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="type == 1">
+            <tr *ngFor="let employee of asignEmployees">
+                <td>{{employee.employeeId}}</td>
+                <td>{{employee.name}}</td>
+                <td>{{employee.year}} - {{employee.month}}</td>
+                <td>{{employee.overTime}}</td>
+                <td>
+                    <span *ngIf="employee.type == 1">دائم</span>
+                    <span *ngIf="employee.type == 2">عقد</span>
+                </td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="type == 2">
+            <tr *ngFor="let employee of contractEmployees">
+                <td>{{employee.employeeId}}</td>
+                <td>{{employee.name}}</td>
+                <td>{{employee.year}} - {{employee.month}}</td>
+                <td>{{employee.overTime}}</td>
+                <td>
+                    <span *ngIf="employee.type == 1">دائم</span>
+                    <span *ngIf="employee.type == 2">عقد</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+  
