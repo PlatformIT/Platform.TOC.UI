@@ -66,23 +66,20 @@
                 تحميل ملف العقود
               </button>
               <button
-              name="type"
-              [ngModel]="data.type"
                 class="btn btn-outline-primary mx-1"
-                (click)="printComponent.printMenu(1);data.type = 1"
-                [ngModelOptions]="{standalone: true}"
+                (click)="printComponent.printMenu(searchForm.value, 1)"
+                type="button"
               >
                 طباعة الدائمين
               </button>
               <button
-              [ngModel]="data.type"
                 class="btn btn-outline-primary mx-1"
-                (click)="printComponent.printMenu(2);data.type = 1"
-                [ngModelOptions]="{standalone: true}"
+                (click)="printComponent.printMenu(searchForm.value, 2)"
+                type="button"
               >
                 طباعة العقود
               </button>
-              <app-print #printComponent [type]="data.type" [employees]="employees" [asignEmployees]="asignEmployees" [contractEmployees]="contractEmployees"></app-print>
+              <app-print #printComponent [employees]="employees" [asignEmployees]="asignEmployees" [contractEmployees]="contractEmployees"></app-print>
             </div>
           </div>
         </form>

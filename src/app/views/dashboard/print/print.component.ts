@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { UploadFileService } from "src/app/shared/services/upload-file.service";
 
 @Component({
   selector: "app-print",
@@ -11,23 +12,31 @@ export class PrintComponent implements OnInit {
   @Input() employees = [];
   @Input() asignEmployees = [];
   @Input() contractEmployees = [];
-  @Input() type;
   employeeType: any;
-  constructor() {}
+  type: any;
+  constructor(private uploadFileService: UploadFileService) {}
 
   ngOnInit() {
     this.date = Date.now();
   }
 
-  printMenu(type) {
-    console.log(this.type);
-    
-    this.employeeType = this.type
-    var data = document.getElementById("empolyee").innerHTML;
-    setTimeout( () => {
-      var newWin = window.open("");
-      newWin.document.open();
-      newWin.document.write(`
+  printMenu(searchForm, type) {
+    this.type = type
+    this.employees = [];
+    this.uploadFileService.getBymonth(searchForm).subscribe((res: any) => {
+      console.log(res);
+      this.employees = res.data;
+      this.asignEmployees = this.employees.filter(
+        (employee) => employee.type == 1
+      );
+      this.contractEmployees = this.employees.filter(
+        (employee) => employee.type == 2
+      );
+      var data = document.getElementById("empolyee").innerHTML;
+      setTimeout(() => {
+        var newWin = window.open("");
+        newWin.document.open();
+        newWin.document.write(`
               <html>
                 <head>
                   <title>القائمة</title>
@@ -59,7 +68,8 @@ export class PrintComponent implements OnInit {
               </body>
               </html>`);
 
-      newWin.document.close();
-    }, 100);
+        newWin.document.close();
+      }, 100);
+    });
   }
 }

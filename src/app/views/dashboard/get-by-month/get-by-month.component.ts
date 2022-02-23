@@ -12,7 +12,7 @@ export class GetByMonthComponent implements OnInit {
   employees: any = [];
   asignEmployees: any = [];
   contractEmployees: any = [];
-  data:any
+  data:any = {}
   constructor(
     private fb: FormBuilder,
     private uploadFileService: UploadFileService
