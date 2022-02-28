@@ -3,6 +3,7 @@ import { SharedAnimations } from 'src/app/shared/animations/shared-animations';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../../shared/services/auth.service';
 import { Router, RouteConfigLoadStart, ResolveStart, RouteConfigLoadEnd, ResolveEnd } from '@angular/router';
+import { LocalStoreService } from 'src/app/shared/services/local-store.service';
 
 @Component({
     selector: 'app-signin',
@@ -14,16 +15,18 @@ export class SigninComponent implements OnInit {
     loading: boolean;
     loadingText: string;
     signinForm: FormGroup;
+    errorMessage: boolean;
     constructor(
         private fb: FormBuilder,
         private auth: AuthService,
-        private router: Router
+        private router: Router,
+        private store: LocalStoreService,
     ) { }
 
     ngOnInit() {
         this.router.events.subscribe(event => {
             if (event instanceof RouteConfigLoadStart || event instanceof ResolveStart) {
-                this.loadingText = 'Loading Dashboard Module...';
+                this.loadingText = 'جاري تحميل الصفحة';
 
                 this.loading = true;
             }
@@ -33,18 +36,26 @@ export class SigninComponent implements OnInit {
         });
 
         this.signinForm = this.fb.group({
-            email: ['test@example.com', Validators.required],
-            password: ['1234', Validators.required]
+            userName: ['', Validators.required],
+            password: ['', Validators.required]
         });
     }
 
     signin() {
+        this.errorMessage = false
         this.loading = true;
-        this.loadingText = 'Sigining in...';
+        this.loadingText = 'جاري تسجيل الدخول';
         this.auth.signin(this.signinForm.value)
-            .subscribe(res => {
-                this.router.navigateByUrl('/dashboard/v1');
+            .subscribe((res:any) => {
+                console.log(res);
+                this.store.setItem("token", res.token)
+                this.store.setItem("isActive", true)
+                this.router.navigateByUrl('/dashboard/uploadfile');
                 this.loading = false;
+            }, err => {
+
+        this.errorMessage = true
+        this.loading = false
             });
     }
 
