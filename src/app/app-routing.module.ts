@@ -56,7 +56,8 @@ const adminRoutes: Routes = [
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard/uploadfile',
+    // redirectTo: 'dashboard/uploadfile',
+    redirectTo: 'sessions/signin',
     pathMatch: 'full'
   },
   {
