@@ -1,3 +1,4 @@
+import { UserComponent } from './user/user.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboadDefaultComponent } from './dashboad-default/dashboad-default.component';
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'reports',
     component: ReportsComponent
+  },
+  {
+    path: 'users',
+    component: UserComponent
   },
   // {
   //   path: 'v1',

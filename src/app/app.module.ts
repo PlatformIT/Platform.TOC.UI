@@ -11,7 +11,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingInterceptor } from './shared/services/loading.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AuthInterceptor } from './shared/services/auth.interceptor';
+import { JwtModule } from '@auth0/angular-jwt';
 
+// Auth
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
 @NgModule({
   declarations: [
     AppComponent
@@ -23,7 +28,12 @@ import { AuthInterceptor } from './shared/services/auth.interceptor';
     BrowserAnimationsModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService, { passThruUnknownUrl: true }),
     AppRoutingModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+      },
+    }),
   ],
   providers: [
     {

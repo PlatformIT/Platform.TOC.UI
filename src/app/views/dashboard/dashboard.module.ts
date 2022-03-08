@@ -15,6 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GetByMonthComponent } from './get-by-month/get-by-month.component';
 import { ReportsComponent } from './reports/reports.component';
 import { PrintComponent } from './print/print.component';
+import { EmployeeComponent } from './employee/employee.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   imports: [
@@ -27,6 +29,6 @@ import { PrintComponent } from './print/print.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [DashboadDefaultComponent, DashboardV2Component, DashboardV3Component, DashboardV4Component, UploadFileComponent, GetByMonthComponent, ReportsComponent, PrintComponent]
+  declarations: [DashboadDefaultComponent, DashboardV2Component, DashboardV3Component, DashboardV4Component, UploadFileComponent, GetByMonthComponent, ReportsComponent, PrintComponent, EmployeeComponent, UserComponent]
 })
 export class DashboardModule { }

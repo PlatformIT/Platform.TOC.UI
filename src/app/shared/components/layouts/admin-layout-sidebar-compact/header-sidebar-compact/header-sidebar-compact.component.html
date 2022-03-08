@@ -4,7 +4,7 @@
     <div class="justify-content-center">
         
         <img width="50" src="./assets/images/1686339982.png" alt="">
-        <h2 class="text-primary d-inline-block mx-1">شركة نفظ ذي قار - قسم تقنية المعلومات</h2></div>
+        <h2 class="text-primary d-inline-block mx-1">شركة نفط ذي قار - قسم تقنية المعلومات</h2></div>
         <div class="logo">
             <!-- <img src="./assets/images/logo.png" alt=""> -->
         </div>
@@ -110,16 +110,17 @@
             </div> -->
     
             <div ngbDropdown [placement]="'bottom-left'" class="user col align-self-end">
-                <img src="./assets/images/faces/1.jpg" id="userDropdown" ngbDropdownToggle alt="">
+                <button class=" btn btn-primary" (click)="signout()">تسجيل الخروج</button>
+                <!-- <img src="./assets/images/faces/1.jpg" id="userDropdown" ngbDropdownToggle alt=""> -->
     
-                <div ngbDropdownMenu aria-labelledby="userDropdown">
+                <!-- <div ngbDropdownMenu aria-labelledby="userDropdown"> -->
                     <!-- <div class="dropdown-header">
                         <i class="i-Lock-User mr-1"></i> Timothy Carlson
                     </div>
                     <button class="dropdown-item">Account settings</button>
                     <button class="dropdown-item">Billing history</button> -->
-                    <button class="dropdown-item" (click)="signout()">تسجيل الخروج</button>
-                </div>
+                   
+                <!-- </div> -->
             </div>
     
         </div>
