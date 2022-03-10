@@ -1,0 +1,101 @@
+<div class="">
+  <div class="breadcrumb">
+    <h1>رفع فايل</h1>
+    <ul>
+      <li><a href="">المستحقين للوقت الاضافي</a></li>
+      <li>رفع فايل</li>
+    </ul>
+    <div class="mr-auto">
+        <div class="row">
+          <button class="btn ml-2 btn-outline-primary"  (click)="confirm(modalConfirm)">
+            حذف البيانات
+          </button>
+        </div>
+      </div>
+  </div>
+</div>
+<hr />
+<div class="row">
+  <div class="col-md-12">
+    <div class="alert alert-info">يرجى ملىء جميع الحقول</div>
+  </div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="uploadFileForm" (ngSubmit)="uploadFile()">
+          <div class="row">
+            <div class="col-md-2">
+              <label>اختر الفايل</label>
+              <input
+                (change)="uploadFileBtn($event)"
+                formControlName="file"
+                class="form-control"
+                type="file"
+              />
+            </div>
+            <div class="col-md-1 d-flex align-items-end">
+              <button class="btn btn-primary">رفع</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="card mt-3">
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>الرقم الوظيفي</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let employee of employees">
+              <td>{{ employee?.id }}</td>
+              <td>{{ employee?.employeeId }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #modalConfirm let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-title">حذف جميع البيانات</h4>
+    </div>
+    <div class="modal-body">
+      <p>
+        <strong
+          >هل انت متاكد من البيانات
+          <span class="text-primary ml-1">  </span>
+          ؟</strong
+        >
+      </p>
+      <p>
+        اذا كنت متاكدا اضغط على
+        <span class="text-danger">تاكيد</span>
+      </p>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-secondary btn"
+        (click)="modal.dismiss('cancel')"
+      >
+        الغاء
+      </button>
+      <button
+        type="button"
+        ngbAutofocus
+        class="btn btn-danger btn ml-2"
+        (click)="deleteAll();modal.dismiss('cancel')"
+      >
+        تاكيد
+      </button>
+    </div>
+  </ng-template>

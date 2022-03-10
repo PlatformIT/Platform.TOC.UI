@@ -8,6 +8,7 @@ import { DashboardV4Component } from './dashboard-v4/dashboard-v4.component';
 import { GetByMonthComponent } from './get-by-month/get-by-month.component';
 import { ReportsComponent } from './reports/reports.component';
 import { UploadFileComponent } from './upload-file/upload-file.component';
+import { DeserveOvertimeComponent } from './deserve-overtime/deserve-overtime.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path: 'users',
     component: UserComponent
+  },
+  {
+    path: 'deserved',
+    component: DeserveOvertimeComponent
   },
   // {
   //   path: 'v1',

@@ -54,18 +54,21 @@
               class="col-md-4 d-flex align-items-end justify-content-end"
             >
               <button
+              *ngIf="roles == 'admin'"
                 (click)="getAssignments()"
                 class="btn btn-outline-primary"
               >
                 تحميل ملف الدائمين
               </button>
               <button
+              *ngIf="roles == 'admin'"
                 (click)="getContracts()"
                 class="btn btn-outline-primary mx-1"
               >
                 تحميل ملف العقود
               </button>
               <button
+              *ngIf="roles != 'contract'"
                 class="btn btn-outline-primary mx-1"
                 (click)="printComponent.printMenu(searchForm.value, 1)"
                 type="button"
@@ -73,6 +76,7 @@
                 طباعة الدائمين
               </button>
               <button
+              *ngIf="roles != 'assignment'"
                 class="btn btn-outline-primary mx-1"
                 (click)="printComponent.printMenu(searchForm.value, 2)"
                 type="button"

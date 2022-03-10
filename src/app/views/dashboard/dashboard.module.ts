@@ -17,6 +17,7 @@ import { ReportsComponent } from './reports/reports.component';
 import { PrintComponent } from './print/print.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { UserComponent } from './user/user.component';
+import { DeserveOvertimeComponent } from './deserve-overtime/deserve-overtime.component';
 
 @NgModule({
   imports: [
@@ -29,6 +30,6 @@ import { UserComponent } from './user/user.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [DashboadDefaultComponent, DashboardV2Component, DashboardV3Component, DashboardV4Component, UploadFileComponent, GetByMonthComponent, ReportsComponent, PrintComponent, EmployeeComponent, UserComponent]
+  declarations: [DashboadDefaultComponent, DashboardV2Component, DashboardV3Component, DashboardV4Component, UploadFileComponent, GetByMonthComponent, ReportsComponent, PrintComponent, EmployeeComponent, UserComponent, DeserveOvertimeComponent]
 })
 export class DashboardModule { }
