@@ -9,6 +9,7 @@ import { GetByMonthComponent } from './get-by-month/get-by-month.component';
 import { ReportsComponent } from './reports/reports.component';
 import { UploadFileComponent } from './upload-file/upload-file.component';
 import { DeserveOvertimeComponent } from './deserve-overtime/deserve-overtime.component';
+import { DoseNotDeservedComponent } from './dose-not-deserved/dose-not-deserved.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path: 'deserved',
     component: DeserveOvertimeComponent
+  },
+  {
+    path: 'not-deserved',
+    component: DoseNotDeservedComponent
   },
   // {
   //   path: 'v1',

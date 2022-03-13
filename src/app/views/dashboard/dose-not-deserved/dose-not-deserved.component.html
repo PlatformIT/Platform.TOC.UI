@@ -1,0 +1,82 @@
+<div class="">
+    <div class="breadcrumb">
+      <h1>رفع فايل</h1>
+      <ul>
+        <li><a href="">غير المستحقين للوقت الاضافي</a></li>
+        <li>رفع فايل</li>
+      </ul>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <form [formGroup]="searchForm" (ngSubmit)="getAllDoseNotDeserved()">
+            <div class="row">
+              <div class="col-md-1">
+                <label>اختر الشهر</label>
+                <select formControlName="month" class="form-control">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                </select>
+              </div>
+              <div class="col-md-1">
+                <label>اختر السنة</label>
+                <select formControlName="year" class="form-control">
+                  <option value="2019">2019</option>
+                  <option value="2020">2020</option>
+                  <option value="2021">2021</option>
+                  <option selected value="2022">2022</option>
+                </select>
+              </div>
+              <div class="col-md-1 d-flex align-items-end">
+                <button [disabled]="searchForm.invalid" class="btn btn-primary">
+                  بحث
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="card mt-3">
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>الرقم الوظيفي</th>
+                <th>الاسم</th>
+                <th>نوع الموظف</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let employee of employees">
+                <td>{{ employee?.id }}</td>
+                <td>{{ employee?.employeeId }}</td>
+                <td>{{ employee?.name }}</td>
+                <td>
+                    <span *ngIf="employee.type == 1">دائم</span>
+                    <span *ngIf="employee.type == 2">عقد</span>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  

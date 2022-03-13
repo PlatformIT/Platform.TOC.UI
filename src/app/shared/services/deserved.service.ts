@@ -15,7 +15,9 @@ export class DeservedService {
   getAll() {
     return this.http.get(this.baseUrl + "DeserveOvertime/GetAll");
   }
-  
+  getAllDoseNoteDesreve(data) {
+    return this.http.get(this.baseUrl + `Employee/GetDoesNotDeserve?month=${data.month}&year=${data.year}`);
+  }
   deleteAll() {
     return this.http.delete(this.baseUrl + "DeserveOvertime/deleteAll");
   }
