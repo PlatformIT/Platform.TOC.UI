@@ -45,6 +45,17 @@
                   بحث
                 </button>
               </div>
+              <div class="col-md-8"></div>
+              <div class="col-md-1 d-flex align-items-end">
+                <button
+                  class="btn btn-outline-primary mx-1"
+                  (click)="printComponent.printMenu(searchForm.value, 2)"
+                  type="button"
+                >
+                  طباعة 
+                </button>
+                <app-print #printComponent [employees]="employees"></app-print>
+              </div>
             </div>
           </form>
         </div>
@@ -59,6 +70,7 @@
                 <th>#</th>
                 <th>الرقم الوظيفي</th>
                 <th>الاسم</th>
+                <th>الساعات الاضافية</th>
                 <th>نوع الموظف</th>
               </tr>
             </thead>
@@ -67,6 +79,7 @@
                 <td>{{ employee?.id }}</td>
                 <td>{{ employee?.employeeId }}</td>
                 <td>{{ employee?.name }}</td>
+                <td>{{ employee?.overTime }}</td>
                 <td>
                     <span *ngIf="employee.type == 1">دائم</span>
                     <span *ngIf="employee.type == 2">عقد</span>
