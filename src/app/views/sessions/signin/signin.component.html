@@ -1,40 +1,173 @@
-<div class="card o-hidden" [@animate]="{value:'*',params:{y:'120px',opacity:'0',delay:'100ms', duration: '400ms'}}">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="p-4">
-          <div class="auth-logo text-center mb-4">
-            <!-- <img src="assets/images/271036943_290201116459884_1781888871873612101_n.png" alt=""> -->
-            <img src="assets/images/1686339982.png" alt="">
-          </div>
-          <h1 class="mb-3 text-18">تسجيل الدخول</h1>
-          <form [formGroup]="signinForm" (ngSubmit)="signin()">
-            <div class="form-group">
-              <label for="email">اسم المستخدم</label>
-              <input id="email" class="form-control " formControlName="userName" type="email">
-            </div>
-            <div class="form-group">
-              <label for="password">كلمة المرور</label>
-              <input id="password" class="form-control " formControlName="password" type="password">
-            </div>
-            <!-- <button class="btn btn-rounded btn-primary btn-block mt-2">Sign In</button> -->
-            <btn-loading btnClass="btn-primary  btn-block mt-3" [loadingText]="loadingText" [loading]="loading">
-              دخول
-            </btn-loading>
-            <div *ngIf="errorMessage" class="alert alert-danger text-center mt-1">اسم المستخدم او كلمة المرور خطأ</div>
-          </form>
-
+<div
+  class="card o-hidden"
+  [@animate]="{
+    value: '*',
+    params: { y: '120px', opacity: '0', delay: '100ms', duration: '400ms' }
+  }"
+>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="p-4">
+        <div class="auth-logo text-center mb-4">
+          <!-- <img src="assets/images/271036943_290201116459884_1781888871873612101_n.png" alt=""> -->
+          <img src="assets/images/1686339982.png" alt="" />
         </div>
-      </div>
-     
-    </div>
-    <div class="row">
-      <div class="col-md-9 px-4">
-        <p>
-          
-          <img width="50" src="assets/images/271036943_290201116459884_1781888871873612101_n.png" alt="">
-          تم تنفيذ النظام بواسطة شركة المنصة 2020 @.
-        </p>
-        
+        <div class="row">
+          <div class="col-md-8">
+            <h1 class="mb-3 text-18">تسجيل الدخول</h1>
+            <form [formGroup]="signinForm" (ngSubmit)="signin()">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="email">اسم المستخدم</label>
+                    <input
+                      id="email"
+                      class="form-control"
+                      formControlName="userName"
+                      type="email"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="password">كلمة المرور</label>
+                    <input
+                      id="password"
+                      class="form-control"
+                      formControlName="password"
+                      type="password"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-12 mt-2">
+                  <btn-loading
+                  btnClass="btn-primary w-100"
+                  [loadingText]="loadingText"
+                  [loading]="loading"
+                >
+                  دخول
+                </btn-loading>
+                <div
+                *ngIf="errorMessage"
+                class="alert alert-danger text-center mt-1"
+              >
+                اسم المستخدم او كلمة المرور خطأ
+              </div>
+                </div>
+              </div>
+             
+           
+              <!-- <button class="btn btn-rounded btn-primary btn-block mt-2">Sign In</button> -->
+             
+             
+            </form>
+          </div>
+          <div class="col-md-4 border-right">
+            <h2 class="mb-3 text-18">بحث سريع</h2>
+            <form>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="">الرقم الوظيفي</label>
+                    <input type="text" class="form-control" #jobNumber/>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label>اختر الشهر</label>
+                  <select #month class="form-control">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label>اختر السنة</label>
+                  <select #year class="form-control">
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option selected value="2022">2022</option>
+                  </select>
+                </div>
+                <div class="col-md-12 mt-2 pt-1">
+                  <btn-loading [loadingText]="loadingTextGetEmployee" [loading]="loadingGetEmployee" btnClass="btn btn-outline-info w-100" (click)="search(jobNumber.value,year.value, month.value,openModal)">
+                    بحث
+                  </btn-loading>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <div class="row">
+    
+    <div class="col-md-6 d-flex align-items-center justify-content-center">
+      <a href="https://www.theitplatform.com/" target="_blank" class="text-dark">
+        <img
+          width="50"
+          src="assets/images/271036943_290201116459884_1781888871873612101_n.png"
+          alt=""
+        />
+        تم تنفيذ النظام بواسطة شركة المنصة .
+      </a>
+    </div>
+    <div class="col-md-6 d-flex align-items-center justify-content-center">
+      <a href="https://toc.oil.gov.iq/" target="_blank" class="text-dark">جميع الحقوق محفوظة لشركة نفط ذي قار {{lastYear}}@</a>
+    </div>
+  </div>
+</div>
+
+  <!-- Modal اضافة و تعديل مستخدم -->
+  <ng-template #openModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">معلومات الموظف</h4>
+    </div>
+    <div class="modal-body text-left">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>الاسم الكامل</th>
+            <th>{{employeeInfo?.name}}</th>
+          </tr>
+          <tr>
+            <th>التاريخ</th>
+            <th>{{employeeInfo?.year}} - {{employeeInfo?.month}}</th>
+          </tr>
+          <tr>
+            <th>عدد الساعات</th>
+            <th>{{employeeInfo?.overTime}}</th>
+          </tr>
+          <tr>
+            <th>نوع الموظف</th>
+            <th>
+              <span *ngIf="employeeInfo.type == 1">دائم</span>
+              <span *ngIf="employeeInfo.type == 2">عقد</span>
+            </th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  
+    <div class="modal-footer">
+      <button
+        type="button"
+        aria-label="Close"
+        class="btn btn-white"
+        (click)="modal.dismiss('Cross click')"
+      >
+        الغاء
+      </button>
+    </div>
+  </ng-template>
+  

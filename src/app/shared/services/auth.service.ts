@@ -40,4 +40,8 @@ export class AuthService {
     this.router.navigateByUrl("/sessions/signin");
     // location.reload();
   }
+
+  searchEmployeeInfo(number, year, month){
+    return this.http.get(this.baseUrl + `employee/get?employeeId=${number}&month=${month}&year=${year}`)
+  }
 }
