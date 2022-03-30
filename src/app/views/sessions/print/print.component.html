@@ -1,0 +1,29 @@
+ <button class="btn btn-outline-primary mx-1" (click)="printMenu()">
+    طباعة 
+  </button>
+  <div id="empolyee" style="display: none">
+    <table class="table">
+        <thead>
+          <tr>
+            <th>الاسم الكامل</th>
+            <th>{{employee?.name}}</th>
+          </tr>
+          <tr>
+            <th>التاريخ</th>
+            <th>{{employee?.year}} - {{employee?.month}}</th>
+          </tr>
+          <tr>
+            <th>عدد الساعات</th>
+            <th>{{employee?.overTime}}</th>
+          </tr>
+          <tr>
+            <th>نوع الموظف</th>
+            <th>
+              <span *ngIf="employee.type == 1">دائم</span>
+              <span *ngIf="employee.type == 2">عقد</span>
+            </th>
+          </tr>
+        </thead>
+      </table>
+  </div>
+  
