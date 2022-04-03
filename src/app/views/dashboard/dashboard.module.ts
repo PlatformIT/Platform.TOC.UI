@@ -19,6 +19,7 @@ import { EmployeeComponent } from './employee/employee.component';
 import { UserComponent } from './user/user.component';
 import { DeserveOvertimeComponent } from './deserve-overtime/deserve-overtime.component';
 import { DoseNotDeservedComponent } from './dose-not-deserved/dose-not-deserved.component';
+import { PrintNotDesComponent } from './dose-not-deserved/print-not-des/print-not-des.component';
 
 @NgModule({
   imports: [
@@ -31,6 +32,6 @@ import { DoseNotDeservedComponent } from './dose-not-deserved/dose-not-deserved.
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [DashboadDefaultComponent, DashboardV2Component, DashboardV3Component, DashboardV4Component, UploadFileComponent, GetByMonthComponent, ReportsComponent, PrintComponent, EmployeeComponent, UserComponent, DeserveOvertimeComponent, DoseNotDeservedComponent]
+  declarations: [DashboadDefaultComponent, DashboardV2Component, DashboardV3Component, DashboardV4Component, UploadFileComponent, GetByMonthComponent, ReportsComponent, PrintComponent, EmployeeComponent, UserComponent, DeserveOvertimeComponent, DoseNotDeservedComponent, PrintNotDesComponent]
 })
 export class DashboardModule { }

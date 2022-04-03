@@ -1,41 +1,25 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { UploadFileService } from "src/app/shared/services/upload-file.service";
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: "app-print",
-  templateUrl: "./print.component.html",
-  styleUrls: ["./print.component.scss"],
+  selector: 'app-print-not-des',
+  templateUrl: './print-not-des.component.html',
+  styleUrls: ['./print-not-des.component.scss']
 })
-export class PrintComponent implements OnInit {
-  loaderData: boolean;
+export class PrintNotDesComponent implements OnInit {
+  @Input() employees :any= [];
   date: any;
-  @Input() employees = [];
-  @Input() asignEmployees = [];
-  @Input() contractEmployees = [];
-  employeeType: any;
-  type: any;
-  constructor(private uploadFileService: UploadFileService) {}
+  constructor() {}
 
   ngOnInit() {
     this.date = Date.now();
   }
 
-  printMenu(searchForm, type) {
-    this.type = type
-    this.employees = [];
-    this.uploadFileService.getBymonth(searchForm).subscribe((res: any) => {
-      this.employees = res.data;
-      this.asignEmployees = this.employees.filter(
-        (employee) => employee.type == 1
-      );
-      this.contractEmployees = this.employees.filter(
-        (employee) => employee.type == 2
-      );
-      var data = document.getElementById("empolyee").innerHTML;
-      setTimeout(() => {
-        var newWin = window.open("");
-        newWin.document.open();
-        newWin.document.write(`
+  printMenu() {
+    var data = document.getElementById("empolyee").innerHTML;
+    setTimeout(() => {
+      var newWin = window.open("");
+      newWin.document.open();
+      newWin.document.write(`
               <html>
                 <head>
                   <title>القائمة</title>
@@ -67,8 +51,8 @@ export class PrintComponent implements OnInit {
               </body>
               </html>`);
 
-        newWin.document.close();
-      }, 100);
-    });
+      newWin.document.close();
+    }, 100);
   }
+
 }

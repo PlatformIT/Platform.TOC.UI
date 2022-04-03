@@ -41,25 +41,22 @@
                 </div>
                 <div class="col-md-12 mt-2">
                   <btn-loading
-                  btnClass="btn-primary w-100"
-                  [loadingText]="loadingText"
-                  [loading]="loading"
-                >
-                  دخول
-                </btn-loading>
-                <div
-                *ngIf="errorMessage"
-                class="alert alert-danger text-center mt-1"
-              >
-                اسم المستخدم او كلمة المرور خطأ
-              </div>
+                    btnClass="btn-primary w-100"
+                    [loadingText]="loadingText"
+                    [loading]="loading"
+                  >
+                    دخول
+                  </btn-loading>
+                  <div
+                    *ngIf="errorMessage"
+                    class="alert alert-danger text-center mt-1"
+                  >
+                    اسم المستخدم او كلمة المرور خطأ
+                  </div>
                 </div>
               </div>
-             
-           
+
               <!-- <button class="btn btn-rounded btn-primary btn-block mt-2">Sign In</button> -->
-             
-             
             </form>
           </div>
           <div class="col-md-4 border-right">
@@ -69,7 +66,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="">الرقم الوظيفي</label>
-                    <input type="text" class="form-control" #jobNumber/>
+                    <input type="text" class="form-control" #jobNumber />
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -99,7 +96,19 @@
                   </select>
                 </div>
                 <div class="col-md-12 mt-2 pt-1">
-                  <btn-loading [loadingText]="loadingTextGetEmployee" [loading]="loadingGetEmployee" btnClass="btn btn-outline-info w-100" (click)="search(jobNumber.value,year.value, month.value,openModal)">
+                  <btn-loading
+                    [loadingText]="loadingTextGetEmployee"
+                    [loading]="loadingGetEmployee"
+                    btnClass="btn btn-outline-info w-100"
+                    (click)="
+                      search(
+                        jobNumber.value,
+                        year.value,
+                        month.value,
+                        openModal
+                      )
+                    "
+                  >
                     بحث
                   </btn-loading>
                 </div>
@@ -111,7 +120,6 @@
     </div>
   </div>
   <div class="row">
-    
     <!-- <div class="col-md-6 d-flex align-items-center justify-content-center">
       <a href="https://www.theitplatform.com/" target="_blank" class="text-dark">
         <img
@@ -123,52 +131,53 @@
       </a>
     </div> -->
     <div class="col-md-6 p-2 d-flex align-items-center justify-content-center">
-      <a href="https://toc.oil.gov.iq/" target="_blank" class="text-dark">جميع الحقوق محفوظة لشركة نفط ذي قار {{lastYear}}@</a>
+      <a href="https://toc.oil.gov.iq/" target="_blank" class="text-dark"
+        >جميع الحقوق محفوظة لشركة نفط ذي قار {{ lastYear }}@</a
+      >
     </div>
   </div>
 </div>
 
-  <!-- Modal اضافة و تعديل مستخدم -->
-  <ng-template #openModal let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">معلومات الموظف</h4>
-    </div>
-    <div class="modal-body text-left">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>الاسم الكامل</th>
-            <th>{{employeeInfo?.name}}</th>
-          </tr>
-          <tr>
-            <th>التاريخ</th>
-            <th>{{employeeInfo?.year}} - {{employeeInfo?.month}}</th>
-          </tr>
-          <tr>
-            <th>عدد الساعات</th>
-            <th>{{employeeInfo?.overTime}}</th>
-          </tr>
-          <tr>
-            <th>نوع الموظف</th>
-            <th>
-              <span *ngIf="employeeInfo.type == 1">دائم</span>
-              <span *ngIf="employeeInfo.type == 2">عقد</span>
-            </th>
-          </tr>
-        </thead>
-      </table>
-    </div>
-  
-    <div class="modal-footer">
-      <app-print [employee]="employeeInfo"></app-print>
-      <button
-        type="button"
-        aria-label="Close"
-        class="btn btn-white mr-auto"
-        (click)="modal.dismiss('Cross click')"
-      >
-        الغاء
-      </button>
-    </div>
-  </ng-template>
-  
+<!-- Modal اضافة و تعديل مستخدم -->
+<ng-template #openModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">معلومات الموظف</h4>
+  </div>
+  <div class="modal-body text-left">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>الاسم الكامل</th>
+          <th>{{ employeeInfo?.name }}</th>
+        </tr>
+        <tr>
+          <th>التاريخ</th>
+          <th>{{ employeeInfo?.year }} - {{ employeeInfo?.month }}</th>
+        </tr>
+        <tr>
+          <th>عدد الساعات</th>
+          <th>{{ employeeInfo?.overTime }}</th>
+        </tr>
+        <tr>
+          <th>نوع الموظف</th>
+          <th>
+            <span *ngIf="employeeInfo.type == 1">دائم</span>
+            <span *ngIf="employeeInfo.type == 2">عقد</span>
+          </th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+
+  <div class="modal-footer">
+    <app-print [employee]="employeeInfo"></app-print>
+    <button
+      type="button"
+      aria-label="Close"
+      class="btn btn-white mr-auto"
+      (click)="modal.dismiss('Cross click')"
+    >
+      الغاء
+    </button>
+  </div>
+</ng-template>

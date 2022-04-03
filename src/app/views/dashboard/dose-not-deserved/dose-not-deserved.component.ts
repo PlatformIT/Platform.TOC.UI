@@ -27,7 +27,6 @@ export class DoseNotDeservedComponent implements OnInit {
   getAllDoseNotDeserved(){
     this.employees = []
     this.deservedService.getAllDoseNoteDesreve(this.searchForm.value).subscribe((res:any) => {
-      console.log(res);
       this.employees = res.data
     })
   }

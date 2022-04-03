@@ -47,14 +47,7 @@
               </div>
               <div class="col-md-8"></div>
               <div class="col-md-1 d-flex align-items-end">
-                <button
-                  class="btn btn-outline-primary mx-1"
-                  (click)="printComponent.printMenu(searchForm.value, 2)"
-                  type="button"
-                >
-                  طباعة 
-                </button>
-                <app-print #printComponent [employees]="employees"></app-print>
+                <app-print-not-des *ngIf="employees?.length != 0" #printComponent [employees]="employees"></app-print-not-des>
               </div>
             </div>
           </form>
