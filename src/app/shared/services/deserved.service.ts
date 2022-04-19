@@ -31,4 +31,10 @@ export class DeservedService {
       );
     }
   }
+  addDeserveEmployee(employeeId){
+    return this.http.post(this.baseUrl + "deserveOverTime/add?employeeId=" + employeeId, {})
+  }
+  deleteDeserveEmployee(employeeId){
+    return this.http.delete(this.baseUrl + "deserveOverTime/delete?id=" + employeeId)
+  }
 }

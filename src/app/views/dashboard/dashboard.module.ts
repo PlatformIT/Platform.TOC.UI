@@ -20,6 +20,8 @@ import { UserComponent } from './user/user.component';
 import { DeserveOvertimeComponent } from './deserve-overtime/deserve-overtime.component';
 import { DoseNotDeservedComponent } from './dose-not-deserved/dose-not-deserved.component';
 import { PrintNotDesComponent } from './dose-not-deserved/print-not-des/print-not-des.component';
+import { EmployeeTypeComponent } from './employee-type/employee-type.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   imports: [
@@ -30,8 +32,9 @@ import { PrintNotDesComponent } from './dose-not-deserved/print-not-des/print-no
     NgbModule,
     DashboardRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule,
   ],
-  declarations: [DashboadDefaultComponent, DashboardV2Component, DashboardV3Component, DashboardV4Component, UploadFileComponent, GetByMonthComponent, ReportsComponent, PrintComponent, EmployeeComponent, UserComponent, DeserveOvertimeComponent, DoseNotDeservedComponent, PrintNotDesComponent]
+  declarations: [DashboadDefaultComponent, DashboardV2Component, DashboardV3Component, DashboardV4Component, UploadFileComponent, GetByMonthComponent, ReportsComponent, PrintComponent, EmployeeComponent, UserComponent, DeserveOvertimeComponent, DoseNotDeservedComponent, PrintNotDesComponent, EmployeeTypeComponent]
 })
 export class DashboardModule { }

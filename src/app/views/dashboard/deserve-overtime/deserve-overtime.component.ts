@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ToastrService } from 'ngx-toastr';
-import { DeservedService } from 'src/app/shared/services/deserved.service';
-import { UploadFileService } from 'src/app/shared/services/upload-file.service';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { isThisSecond } from "date-fns/esm";
+import { ToastrService } from "ngx-toastr";
+import { DeservedService } from "src/app/shared/services/deserved.service";
+import { UploadFileService } from "src/app/shared/services/upload-file.service";
 
 @Component({
-  selector: 'app-deserve-overtime',
-  templateUrl: './deserve-overtime.component.html',
-  styleUrls: ['./deserve-overtime.component.scss']
+  selector: "app-deserve-overtime",
+  templateUrl: "./deserve-overtime.component.html",
+  styleUrls: ["./deserve-overtime.component.scss"],
 })
 export class DeserveOvertimeComponent implements OnInit {
   hodidaysSelected: any[] = [];
@@ -19,6 +20,10 @@ export class DeserveOvertimeComponent implements OnInit {
   blockedEployees: any = [];
   data: any = {};
   confirmResut: string;
+  employeeData = {
+    employeeId: "",
+  };
+  employeeId: any;
   constructor(
     private fb: FormBuilder,
     private modalService: NgbModal,
@@ -30,13 +35,13 @@ export class DeserveOvertimeComponent implements OnInit {
     this.uploadFileForm = this.fb.group({
       file: ["", Validators.required],
     });
-    this.getAll()
+    this.getAll();
   }
-  getAll(){
-    this.deservedService.getAll().subscribe((res:any) => {
+  getAll() {
+    this.deservedService.getAll().subscribe((res: any) => {
       console.log(res);
-      this.employees = res.data
-    })
+      this.employees = res.data;
+    });
   }
   open(holidaysModel) {
     this.modalService
@@ -61,7 +66,7 @@ export class DeserveOvertimeComponent implements OnInit {
     this.deservedService.uploadFile(fromData).subscribe(
       (res: any) => {
         this.toastr.success("تم رفع الملف");
-        this.getAll()
+        this.getAll();
       },
       (err: any) => {
         if (err.error.errorCode == 1) {
@@ -72,11 +77,11 @@ export class DeserveOvertimeComponent implements OnInit {
       }
     );
   }
-  deleteAll(){
-    this.deservedService.deleteAll().subscribe((res:any) => {
-      this.toastr.success("تم حذف جميع البيانات")
+  deleteAll() {
+    this.deservedService.deleteAll().subscribe((res: any) => {
+      this.toastr.success("تم حذف جميع البيانات");
       this.getAll();
-    })
+    });
   }
   confirm(content) {
     this.modalService
@@ -89,5 +94,42 @@ export class DeserveOvertimeComponent implements OnInit {
           this.confirmResut = `Dismissed with: ${reason}`;
         }
       );
+  }
+  addNewEmployee(employeeId: any) {
+    console.log("====================================");
+    console.log(employeeId.value);
+    console.log("====================================");
+    this.deservedService.addDeserveEmployee(employeeId.value).subscribe(
+      (res: any) => {
+        this.toastr.success("تم اضافة موظف جديد");
+        this.modalService.dismissAll();
+        this.employeeData.employeeId = "";
+        this.getAll();
+      },
+      (error) => {
+        this.toastr.error("لم يتم الاضافة", "تأكد من البيانات المدخلة");
+      }
+    );
+  }
+  deleteEmployee(content,id) {
+    this.employeeId = id;
+    this.modalService
+      .open(content, { ariaLabelledBy: "modal-basic-title", centered: true })
+      .result.then(
+        (result) => {
+          this.confirmResut = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.confirmResut = `Dismissed with: ${reason}`;
+        }
+      );
+  }
+  deleteOne(){
+    this.deservedService.deleteDeserveEmployee(this.employeeId).subscribe((res:any) => {
+      this.toastr.success("تم حذف الموظف")
+      this.getAll();
+    }, err => {
+      this.toastr.error("لم يتم الحذف")
+    })
   }
 }

@@ -2,7 +2,7 @@
   <div class="breadcrumb">
     <h1>رفع فايل</h1>
     <ul>
-      <li><a href="">المستحقين للوقت الاضافي</a></li>
+      <li><a href="">نوع الموظف</a></li>
       <li>رفع فايل</li>
     </ul>
     <div class="mr-auto">
@@ -12,12 +12,6 @@
           (click)="confirm(modalConfirm)"
         >
           حذف البيانات
-        </button>
-        <button
-          class="btn ml-2 btn-outline-primary"
-          (click)="confirm(addEmployee)"
-        >
-          اضافة موظف
         </button>
       </div>
     </div>
@@ -33,6 +27,16 @@
       <div class="card-body">
         <form [formGroup]="uploadFileForm" (ngSubmit)="uploadFile()">
           <div class="row">
+            <div class="col-md-2">
+              <label>نوع الموظف</label>
+              <select
+                formControlName="employeeTypeSelected"
+                class="form-control"
+              >
+                <option value="1">دائم</option>
+                <option value="2">عقود</option>
+              </select>
+            </div>
             <div class="col-md-2">
               <label>اختر الفايل</label>
               <input
@@ -50,6 +54,7 @@
       </div>
     </div>
   </div>
+
   <div class="col-md-12">
     <div class="card mt-3">
       <div class="card-body">
@@ -58,19 +63,38 @@
             <tr>
               <th>#</th>
               <th>الرقم الوظيفي</th>
-              <th>التفاصيل</th>
+              <th>نوع الموظف</th>
+              <th>الحالة</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let employee of employees">
+            <tr
+              *ngFor="
+                let employee of employees
+                  | paginate
+                    : {
+                        itemsPerPage: pageSize,
+                        currentPage: page,
+                        totalItems: resData?.totalCount
+                      }
+              "
+            >
               <td>{{ employee?.id }}</td>
               <td>{{ employee?.employeeId }}</td>
               <td>
-                <button class="btn btn-danger" (click)="deleteEmployee(modalConfirmDelete,employee.id)" >حذف</button>
+                <span *ngIf="employee.type == 1">دائم</span>
+                <span *ngIf="employee.type == 2">عقد</span>
               </td>
+
+              <td>{{ employee?.isDeleted ? "متوقف" : "فعال" }}</td>
             </tr>
           </tbody>
         </table>
+        <pagination-controls
+          (pageChange)="page = $event;getAll()"
+          previousLabel=""
+          nextLabel=""
+        ></pagination-controls>
       </div>
     </div>
   </div>
@@ -89,7 +113,7 @@
       >
     </p>
     <p>
-      اذا كنت متاكد اضغط على
+      اذا كنت متاكدا اضغط على
       <span class="text-danger">تاكيد</span>
     </p>
   </div>
@@ -106,88 +130,6 @@
       ngbAutofocus
       class="btn btn-danger btn ml-2"
       (click)="deleteAll(); modal.dismiss('cancel')"
-    >
-      تاكيد
-    </button>
-  </div>
-</ng-template>
-
-<ng-template #addEmployee let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-title">اضافة موظف</h4>
-  </div>
-  <div class="modal-body">
-    <form #form>
-      <div class="form-gorup">
-        <label for="employeeId">الرقم الوظيفي</label>
-        <input
-          class="form-control"
-          type="text"
-          placeholder="11111"
-          #employeeId
-          [(ngModel)]="employeeData.employeeId"
-          name="employee"
-        />
-      </div>
-      <button
-        type="button"
-        class="btn btn-primary mt-2"
-        (click)="addNewEmployee(employeeId)"
-      >
-        اضافة
-      </button>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-secondary btn"
-      (click)="modal.dismiss('cancel')"
-    >
-      الغاء
-    </button>
-    <button
-      type="button"
-      ngbAutofocus
-      class="btn btn-danger btn ml-2"
-      (click)="deleteAll(); modal.dismiss('cancel')"
-    >
-      تاكيد
-    </button>
-  </div>
-</ng-template>
-
-
-<ng-template #modalConfirmDelete let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-title">حذف الموظف</h4>
-  </div>
-  <div class="modal-body">
-    <p>
-      <strong
-        >هل انت متاكد من عملية الحذف
-        <span class="text-primary ml-1"> </span>
-        ؟</strong
-      >
-    </p>
-    <p>
-      اذا كنت متاكد اضغط على
-      <span class="text-danger">تاكيد</span>
-    </p>
-  </div>
-  <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-secondary btn"
-      (click)="modal.dismiss('cancel')"
-    >
-      الغاء
-    </button>
-    <button
-      type="button"
-      ngbAutofocus
-      class="btn btn-danger btn ml-2"
-      (click)="deleteOne(); modal.dismiss('cancel')"
     >
       تاكيد
     </button>

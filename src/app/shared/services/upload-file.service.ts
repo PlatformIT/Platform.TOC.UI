@@ -63,4 +63,17 @@ export class UploadFileService {
       { responseType: "blob" }
     );
   }
+
+  addContractType(file){
+    return this.htpp.post(this.baseUrl + `employeeType/addContract`, file)
+  }
+  addAssignmentType(file){
+    return this.htpp.post(this.baseUrl + `employeeType/addAssignment`, file)
+  }
+  getEmployeeType(start = 0, take = 10){
+    return this.htpp.get(this.baseUrl + `employeeType/get?start=${start}&take=${take}`)
+  }
+  deleteEmployeeType(){
+    return this.htpp.delete(this.baseUrl + `employeeType/deleteAll`)
+  }
 }
