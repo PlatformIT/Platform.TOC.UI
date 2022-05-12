@@ -24,6 +24,8 @@ export class DeserveOvertimeComponent implements OnInit {
     employeeId: "",
   };
   employeeId: any;
+  resData: any;
+  showSearch: boolean = true;
   constructor(
     private fb: FormBuilder,
     private modalService: NgbModal,
@@ -39,8 +41,8 @@ export class DeserveOvertimeComponent implements OnInit {
   }
   getAll() {
     this.deservedService.getAll().subscribe((res: any) => {
-      console.log(res);
       this.employees = res.data;
+      this.resData = res
     });
   }
   open(holidaysModel) {
@@ -96,9 +98,6 @@ export class DeserveOvertimeComponent implements OnInit {
       );
   }
   addNewEmployee(employeeId: any) {
-    console.log("====================================");
-    console.log(employeeId.value);
-    console.log("====================================");
     this.deservedService.addDeserveEmployee(employeeId.value).subscribe(
       (res: any) => {
         this.toastr.success("تم اضافة موظف جديد");
@@ -130,6 +129,15 @@ export class DeserveOvertimeComponent implements OnInit {
       this.getAll();
     }, err => {
       this.toastr.error("لم يتم الحذف")
+    })
+  }
+  searchEmployee(employeeId){
+    this.employees = []
+    this.deservedService.getEmployeeTypeById(employeeId).subscribe((res:any) => {
+      res.data == null ? false : this.employees.push(res.data)
+     this.resData = res
+    }, err => {
+      this.toastr.error("لم يتم جلب البيانات")
     })
   }
 }

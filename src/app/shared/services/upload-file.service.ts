@@ -76,4 +76,10 @@ export class UploadFileService {
   deleteEmployeeType(){
     return this.htpp.delete(this.baseUrl + `employeeType/deleteAll`)
   }
+  getEmployeeTypeById(employeeId){
+    return this.htpp.get(this.baseUrl + `employeeType/search?employeeId=${employeeId}`)
+  }
+  deleteEmployee(id){
+    return this.htpp.delete(this.baseUrl + `employeeType/delete?id=${id}`)
+  }
 }

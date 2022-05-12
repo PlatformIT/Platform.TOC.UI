@@ -57,6 +57,17 @@
 
   <div class="col-md-12">
     <div class="card mt-3">
+      <div class="card-header bg-primary">
+        <div class="row">
+          <div class="col-md-4">
+            <input type="text" class="form-control" placeholder="ادخل الرقم الوظيفي" #employeeIdInput>
+          </div>
+          <div class="col-md-2">
+            <button *ngIf="showSearch" (click)="searchEmployee(employeeIdInput.value);showSearch = false" class="btn btn-secondary">بحث</button>
+            <button *ngIf="!showSearch" (click)="employeeIdInput.value = '';getAll();showSearch = true" class="btn btn-secondary">الغاء البحث</button>
+          </div>
+        </div>
+      </div>
       <div class="card-body">
         <table class="table">
           <thead>
@@ -65,9 +76,13 @@
               <th>الرقم الوظيفي</th>
               <th>نوع الموظف</th>
               <th>الحالة</th>
+              <th>التفاصيل</th>
             </tr>
           </thead>
           <tbody>
+            <tr *ngIf="resData?.data == null">
+              <td colspan="5" class="text-center">لا توجد بيانات</td>
+            </tr>
             <tr
               *ngFor="
                 let employee of employees
@@ -87,6 +102,10 @@
               </td>
 
               <td>{{ employee?.isDeleted ? "متوقف" : "فعال" }}</td>
+              <td>
+                <!-- (click)="deleteEmployee(employee?.id)" -->
+                <button (click)="confirmDeleteEmployeef(confirmDeleteEmployee,employee?.id)" class="btn btn-danger">حذف</button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -130,6 +149,44 @@
       ngbAutofocus
       class="btn btn-danger btn ml-2"
       (click)="deleteAll(); modal.dismiss('cancel')"
+    >
+      تاكيد
+    </button>
+  </div>
+</ng-template>
+
+
+
+<ng-template #confirmDeleteEmployee let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">حذف جميع البيانات</h4>
+  </div>
+  <div class="modal-body">
+    <p>
+      <strong
+        >هل انت متاكد من البيانات
+        <span class="text-primary ml-1"> </span>
+        ؟</strong
+      >
+    </p>
+    <p>
+      اذا كنت متاكدا اضغط على
+      <span class="text-danger">تاكيد</span>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-secondary btn"
+      (click)="modal.dismiss('cancel')"
+    >
+      الغاء
+    </button>
+    <button
+      type="button"
+      ngbAutofocus
+      class="btn btn-danger btn ml-2"
+      (click)="deleteEmployee(); modal.dismiss('cancel')"
     >
       تاكيد
     </button>

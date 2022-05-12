@@ -37,4 +37,8 @@ export class DeservedService {
   deleteDeserveEmployee(employeeId){
     return this.http.delete(this.baseUrl + "deserveOverTime/delete?id=" + employeeId)
   }
+  
+  getEmployeeTypeById(employeeId){
+    return this.http.get(this.baseUrl + `deserveOverTime/search?employeeId=${employeeId}`)
+  }
 }

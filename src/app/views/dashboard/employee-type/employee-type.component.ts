@@ -18,6 +18,8 @@ export class EmployeeTypeComponent implements OnInit {
   uploadedFiles: any;
   employees: any;
   resData: any;
+  employeeId: any;
+  showSearch: boolean = true;
   constructor(
     private fb: FormBuilder,
     private modalService: NgbModal,
@@ -92,10 +94,39 @@ export class EmployeeTypeComponent implements OnInit {
         }
       );
   }
+  confirmDeleteEmployeef(confirmDeleteEmployee,employeeid){
+    this.employeeId = employeeid;
+    this.modalService
+    .open(confirmDeleteEmployee, { ariaLabelledBy: "modal-basic-title", centered: true })
+    .result.then(
+      (result) => {
+        this.confirmResut = `Closed with: ${result}`;
+      },
+      (reason) => {
+        this.confirmResut = `Dismissed with: ${reason}`;
+      }
+    );
+  }
   deleteAll() {
     this.uploadFileService.deleteEmployeeType().subscribe((res:any) => {
       this.toastr.success("تم حذف جميع البيانات")
       this.getAll();
+    })
+  }
+  searchEmployee(employeeId){
+    this.employees = []
+    this.uploadFileService.getEmployeeTypeById(employeeId).subscribe((res:any) => {
+      res.data == null ? false : this.employees.push(res.data)
+     this.resData = res
+    }, err => {
+      this.toastr.error("لم يتم جلب البيانات")
+    })
+  }
+  deleteEmployee(){
+    this.uploadFileService.deleteEmployee(this.employeeId).subscribe((res:any) =>{
+      this.toastr.success("تم حذف البيانات")
+    }, err => {
+      this.toastr.error("لم يتم الحذف")
     })
   }
 }
