@@ -30,5 +30,5 @@ export class DoseNotDeservedComponent implements OnInit {
       this.employees = res.data
     })
   }
- 
+
 }

@@ -41,4 +41,11 @@ export class DeservedService {
   getEmployeeTypeById(employeeId){
     return this.http.get(this.baseUrl + `deserveOverTime/search?employeeId=${employeeId}`)
   }
+  getNotDeservedFile(){
+    return this.http.get(
+      this.baseUrl +
+        `DeserveOvertime/GetExcel`,
+      { responseType: "blob" }
+    );
+  }
 }

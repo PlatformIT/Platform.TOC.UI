@@ -19,6 +19,9 @@
         >
           اضافة موظف
         </button>
+        <button (click)="getNotDeservedFile()" class="btn ml-2  btn-outline-primary">
+          تحميل ملف غير مستحقين للوقت الاضافي
+        </button>
       </div>
     </div>
   </div>
@@ -55,11 +58,30 @@
       <div class="card-header bg-primary">
         <div class="row">
           <div class="col-md-4">
-            <input type="text" class="form-control" placeholder="ادخل الرقم الوظيفي" #employeeIdInput>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="ادخل الرقم الوظيفي"
+              #employeeIdInput
+            />
           </div>
           <div class="col-md-2">
-            <button *ngIf="showSearch" (click)="searchEmployee(employeeIdInput.value);showSearch = false" class="btn btn-secondary">بحث</button>
-            <button *ngIf="!showSearch" (click)="employeeIdInput.value = '';getAll();showSearch = true" class="btn btn-secondary">الغاء البحث</button>
+            <button
+              *ngIf="showSearch"
+              (click)="
+                searchEmployee(employeeIdInput.value); showSearch = false
+              "
+              class="btn btn-secondary"
+            >
+              بحث
+            </button>
+            <button
+              *ngIf="!showSearch"
+              (click)="employeeIdInput.value = ''; getAll(); showSearch = true"
+              class="btn btn-secondary"
+            >
+              الغاء البحث
+            </button>
           </div>
         </div>
       </div>
@@ -80,7 +102,12 @@
               <td>{{ employee?.id }}</td>
               <td>{{ employee?.employeeId }}</td>
               <td>
-                <button class="btn btn-danger" (click)="deleteEmployee(modalConfirmDelete,employee.id)" >حذف</button>
+                <button
+                  class="btn btn-danger"
+                  (click)="deleteEmployee(modalConfirmDelete, employee.id)"
+                >
+                  حذف
+                </button>
               </td>
             </tr>
           </tbody>
@@ -170,7 +197,6 @@
     </button>
   </div>
 </ng-template>
-
 
 <ng-template #modalConfirmDelete let-modal>
   <div class="modal-header">

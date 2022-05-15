@@ -6,6 +6,7 @@ import { ToastrService } from "ngx-toastr";
 import { DeservedService } from "src/app/shared/services/deserved.service";
 import { UploadFileService } from "src/app/shared/services/upload-file.service";
 
+declare var window: any;
 @Component({
   selector: "app-deserve-overtime",
   templateUrl: "./deserve-overtime.component.html",
@@ -139,5 +140,34 @@ export class DeserveOvertimeComponent implements OnInit {
     }, err => {
       this.toastr.error("لم يتم جلب البيانات")
     })
+  }
+  getNotDeservedFile() {
+    this.deservedService.getNotDeservedFile().subscribe(
+      (res: any) => {
+        let newBlob = new Blob([res], {
+          type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        });
+        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+          window.navigator.msSaveOrOpenBlob(newBlob);
+          return;
+        }
+        let data = window.URL.createObjectURL(newBlob);
+        let link = document.createElement("a");
+        link.href = data;
+        link.download = `غير مستحقين للوقت الاضاقي.xlsx`;
+        link.dispatchEvent(
+          new MouseEvent("click", {
+            bubbles: true,
+            cancelable: true,
+            view: window,
+          })
+        );
+        setTimeout(function () {
+          window.URL.revokeObjectURL(data);
+          link.remove();
+        }, 100);
+      },
+      (err: any) => {}
+    );
   }
 }
