@@ -63,6 +63,7 @@ export class NavigationService {
                     { icon: 'i-Files', name: 'الاحتساب حسب الشهر', state: '/dashboard/getByMonth', type: 'link' },
                     { icon: 'i-Over-Time', name: 'تقارير الاحتساب', state: '/dashboard/reports', type: 'link' },
                     { icon: 'i-Over-Time', name: 'المستحقين للوقت الاضافي', state: '/dashboard/deserved', type: 'link' },
+                    { icon: 'i-Over-Time', name: 'غير المستحقين للوقت الاضافي', state: '/dashboard/not-deserved', type: 'link' },
                     { icon: 'i-Over-Time', name: 'المستخدمين', state: '/dashboard/users', type: 'link' },
                     { icon: 'i-Over-Time', name: 'نوع الموظف', state: '/dashboard/employeeType', type: 'link' },
                     // { icon: 'i-Clock-3', name: 'Version 1', state: '/dashboard/v1', type: 'link' },

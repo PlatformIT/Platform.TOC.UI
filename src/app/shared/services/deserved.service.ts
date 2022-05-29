@@ -29,6 +29,11 @@ export class DeservedService {
         this.baseUrl +
           `Assignments/GetDoesNotDeserve?month=${data.month}&year=${data.year}`
       );
+    }else if (localStorage.getItem("roles") == '"admin"') {
+      return this.http.get(
+        this.baseUrl +
+          `Employee/GetByType?month=${data.month}&year=${data.year}&type=${data.type}`
+      );
     }
   }
   addDeserveEmployee(employeeId){

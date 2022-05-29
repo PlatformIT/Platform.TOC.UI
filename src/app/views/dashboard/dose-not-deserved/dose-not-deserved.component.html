@@ -40,12 +40,20 @@
                   <option selected value="2022">2022</option>
                 </select>
               </div>
+              <div *ngIf="isAdmin" class="col-md-1">
+                <label>نوع الوظيفة</label>
+                <select formControlName="type" class="form-control">
+                  <option selected value="">الكل</option>
+                  <option value="1">الدائمين</option>
+                  <option value="2">العقود</option>
+                </select>
+              </div>
               <div class="col-md-1 d-flex align-items-end">
                 <button [disabled]="searchForm.invalid" class="btn btn-primary">
                   بحث
                 </button>
               </div>
-              <div class="col-md-8"></div>
+              <div class="col-md-7"></div>
               <div class="col-md-1 d-flex align-items-end">
                 <app-print-not-des *ngIf="employees?.length != 0" #printComponent [employees]="employees"></app-print-not-des>
               </div>

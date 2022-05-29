@@ -9,20 +9,23 @@ import { DeservedService } from 'src/app/shared/services/deserved.service';
 })
 export class DoseNotDeservedComponent implements OnInit {
   searchForm: FormGroup;
-  employees: any;
+  employees: any[] =[];
   data: any = {};
   confirmResut: string;
+  isAdmin: boolean;
   constructor(
     private fb: FormBuilder,
     private deservedService: DeservedService,
   ) {}
 
   ngOnInit(): void {
+    this.isAdmin = localStorage.getItem("roles") == "\"admin\"";
     this.searchForm = this.fb.group({
       month: ["", Validators.required],
       year: ["", Validators.required],
+      type:[""]
     });
-    this.getAllDoseNotDeserved()
+    // this.getAllDoseNotDeserved()
   }
   getAllDoseNotDeserved(){
     this.employees = []
