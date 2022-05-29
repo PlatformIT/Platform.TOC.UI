@@ -32,7 +32,7 @@ export class DeservedService {
     }else if (localStorage.getItem("roles") == '"admin"') {
       return this.http.get(
         this.baseUrl +
-          `Employee/GetByType?month=${data.month}&year=${data.year}&type=${data.type}`
+          `Employee/GetDoesNotDeserveByType?month=${data.month}&year=${data.year}&type=${data.type}`
       );
     }
   }
