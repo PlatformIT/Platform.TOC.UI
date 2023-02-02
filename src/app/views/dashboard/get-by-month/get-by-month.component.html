@@ -37,10 +37,9 @@
             <div class="col-md-1">
               <label>اختر السنة</label>
               <select formControlName="year" class="form-control">
-                <option value="2019">2019</option>
-                <option value="2020">2020</option>
-                <option value="2021">2021</option>
-                <option selected value="2022">2022</option>
+                <option *ngFor="let year of listYears" [value]="year">
+                  {{ year }}
+                </option>
               </select>
             </div>
             <div class="col-md-1 d-flex align-items-end">
@@ -54,21 +53,21 @@
               class="col-md-4 d-flex align-items-end justify-content-end"
             >
               <button
-              *ngIf="roles == 'admin'"
+                *ngIf="roles == 'admin'"
                 (click)="getAssignments()"
                 class="btn btn-outline-primary"
               >
                 تحميل ملف الدائمين
               </button>
               <button
-              *ngIf="roles == 'admin'"
+                *ngIf="roles == 'admin'"
                 (click)="getContracts()"
                 class="btn btn-outline-primary mx-1"
               >
                 تحميل ملف العقود
               </button>
               <button
-              *ngIf="roles != 'contract'"
+                *ngIf="roles != 'contract'"
                 class="btn btn-outline-primary mx-1"
                 (click)="printComponent.printMenu(searchForm.value, 1)"
                 type="button"
@@ -76,14 +75,19 @@
                 طباعة الدائمين
               </button>
               <button
-              *ngIf="roles != 'assignment'"
+                *ngIf="roles != 'assignment'"
                 class="btn btn-outline-primary mx-1"
                 (click)="printComponent.printMenu(searchForm.value, 2)"
                 type="button"
               >
                 طباعة العقود
               </button>
-              <app-print #printComponent [employees]="employees" [asignEmployees]="asignEmployees" [contractEmployees]="contractEmployees"></app-print>
+              <app-print
+                #printComponent
+                [employees]="employees"
+                [asignEmployees]="asignEmployees"
+                [contractEmployees]="contractEmployees"
+              ></app-print>
             </div>
           </div>
         </form>

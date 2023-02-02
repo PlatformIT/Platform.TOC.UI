@@ -17,6 +17,8 @@ export class UploadFileComponent implements OnInit {
   nowDate = new Date(Date.now());
   blockedEployees: any = [];
   data: any = {};
+  listYears: number[]=[];
+  thisYear: number;
   constructor(
     private fb: FormBuilder,
     private modalService: NgbModal,
@@ -32,6 +34,13 @@ export class UploadFileComponent implements OnInit {
       endTime: ["14:20", Validators.required],
       file: ["", Validators.required],
     });
+
+
+    this.thisYear = new Date().getFullYear()
+    for (let firstYear = 2019; firstYear <= this.thisYear; firstYear++) {
+      this.listYears.push(firstYear)
+    }
+    
   }
   open(holidaysModel) {
     this.modalService

@@ -34,10 +34,7 @@
               <div class="col-md-1">
                 <label>اختر السنة</label>
                 <select formControlName="year" class="form-control">
-                  <option value="2019">2019</option>
-                  <option value="2020">2020</option>
-                  <option value="2021">2021</option>
-                  <option selected value="2022">2022</option>
+                  <option *ngFor="let year of listYears" [value]="year">{{year}}</option>
                 </select>
               </div>
               <div *ngIf="isAdmin" class="col-md-1">

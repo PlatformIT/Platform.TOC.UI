@@ -13,6 +13,9 @@ export class DoseNotDeservedComponent implements OnInit {
   data: any = {};
   confirmResut: string;
   isAdmin: boolean;
+
+  listYears: number[]=[];
+  thisYear: number;
   constructor(
     private fb: FormBuilder,
     private deservedService: DeservedService,
@@ -26,6 +29,12 @@ export class DoseNotDeservedComponent implements OnInit {
       type:[""]
     });
     // this.getAllDoseNotDeserved()
+
+    
+    this.thisYear = new Date().getFullYear()
+    for (let firstYear = 2019; firstYear <= this.thisYear; firstYear++) {
+      this.listYears.push(firstYear)
+    }
   }
   getAllDoseNotDeserved(){
     this.employees = []

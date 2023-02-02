@@ -14,6 +14,9 @@ export class GetByMonthComponent implements OnInit {
   contractEmployees: any = [];
   data:any = {}
   roles: string;
+
+  listYears: number[]=[];
+  thisYear: number;
   constructor(
     private fb: FormBuilder,
     private uploadFileService: UploadFileService
@@ -25,7 +28,13 @@ export class GetByMonthComponent implements OnInit {
       year: ["", Validators.required],
     });
     this.roles = localStorage.getItem("roles").replace(/"/g, '')
-    console.log(this.roles);
+    
+    
+    
+    this.thisYear = new Date().getFullYear()
+    for (let firstYear = 2019; firstYear <= this.thisYear; firstYear++) {
+      this.listYears.push(firstYear)
+    }
     
   }
   search() {
