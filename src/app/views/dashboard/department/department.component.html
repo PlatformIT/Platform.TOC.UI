@@ -1,0 +1,117 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="container-fluid d-flex justify-content-between">
+                    <div class="col-lg-3 ps-0">
+                        <p class="nobleui-logo d-block mt-3"><b>الاقسام</b></p>
+                    </div>
+                    <div class="col-lg-3 d-flex justify-content-end">
+                        <div>
+                            <button (click)="openStafTypeModal(stafTypeModal, 1)"
+                                class="btn btn-outline-primary btn-sm">
+                                اضافة قسم جديد
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid mt-2 d-flex justify-content-center w-100">
+                    <div class="table-responsive w-100">
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">التسلسل</th>
+                                    <th class="text-center">الرمز</th>
+                                    <th class="text-center">الاسم</th>
+                                    <th class="text-center">الاجراءات</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let stafType of resData; let i = index">
+                                    <td class="text-center">{{ (currentPage - 1 ) * 10 + i + 1 }}</td>
+                                    <td class="text-center">{{ stafType.code }}</td>
+                                    <td class="text-center">{{ stafType.name }}</td>
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-info mx-1"
+                                            (click)="openStafTypeModal(stafTypeModal, 2, stafType)">
+                                            تعديل
+                                        </button>
+                                        <button class="btn btn-sm btn-danger mx-1"
+                                            (click)="openConfirmModal(confirmModal, stafType)">
+                                            حذف
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="container-fluid mt-5 d-flex justify-content-center w-100">
+                    <ngb-pagination class="d-flex justify-content-center" [collectionSize]="resData?.totalCount"
+                        [(page)]="currentPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                        (pageChange)="pageChange()"></ngb-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #stafTypeModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ modelTitle }}</h5>
+        <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="stafTypeForm" (ngSubmit)="saveStafType()">
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <label class="pb-2"> الرمز</label>
+                    <span class="text-danger">*</span>
+                    <input type="text" formControlName="code" class="form-control" />
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label class="pb-2"> الاسم</label>
+                    <span class="text-danger">*</span>
+                    <input type="text" formControlName="name" class="form-control" />
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label class="pb-2"> اختر القسم</label>
+                    <span class="text-danger">*</span>
+                    <select class="form-control" formControlName="parent">
+                        <option value="0">القسم الرئيسي</option>
+                        <option [value]="department.id" *ngFor="let department of departments">{{department.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-12">
+                    <button class="btn btn-primary">حفظ البيانات</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="modal.close('by: close button')">
+            اغلاق
+        </button>
+        <!-- <button type="button" class="btn btn-primary" (click)="modal.close('by: save button')">Save changes</button> -->
+    </div>
+</ng-template>
+
+<ng-template #confirmModal let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">حـــذف</h5>
+        <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <p>هل انت متاكد من عملية الحذف؟</p>
+        <strong class="text-danger">اذا كنت متاكد اضفط على تاكيد</strong>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger me-auto" (click)="delete()">
+            تأكيد
+        </button>
+        <button type="button" class="btn" (click)="modal.close('by: close button')">
+            اغلاق
+        </button>
+    </div>
+</ng-template>

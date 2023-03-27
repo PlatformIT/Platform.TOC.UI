@@ -11,6 +11,8 @@ import { ReportsComponent } from './reports/reports.component';
 import { UploadFileComponent } from './upload-file/upload-file.component';
 import { DeserveOvertimeComponent } from './deserve-overtime/deserve-overtime.component';
 import { DoseNotDeservedComponent } from './dose-not-deserved/dose-not-deserved.component';
+import { DepartmentComponent } from './department/department.component';
+import { ReportCheckComponent } from './report-check/report-check.component';
 
 const routes: Routes = [
   {
@@ -40,6 +42,14 @@ const routes: Routes = [
   {
     path: 'employeeType',
     component: EmployeeTypeComponent
+  },
+  {
+    path: 'department',
+    component: DepartmentComponent
+  },
+  {
+    path: 'report-check',
+    component: ReportCheckComponent
   },
   // {
   //   path: 'v1',
