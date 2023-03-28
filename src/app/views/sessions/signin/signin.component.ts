@@ -27,8 +27,10 @@ export class SigninComponent implements OnInit {
   errorMessage: boolean;
   loadingGetEmployee: boolean;
   loadingTextGetEmployee: string;
-    employeeInfo: any;
+  employeeInfo: any;
   lastYear: number;
+  thisYear: number;
+  listYears: any[] = [];
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
@@ -37,12 +39,12 @@ export class SigninComponent implements OnInit {
     private navigationService: NavigationService,
     private toastr: ToastrService,
     private modalService: NgbModal
-  ) {}
+  ) { }
 
   ngOnInit() {
     let date = new Date();
     this.lastYear = date.getFullYear();
-    
+
     this.router.events.subscribe((event) => {
       if (
         event instanceof RouteConfigLoadStart ||
@@ -55,12 +57,19 @@ export class SigninComponent implements OnInit {
       if (event instanceof RouteConfigLoadEnd || event instanceof ResolveEnd) {
         this.loading = false;
       }
+
+
     });
 
     this.signinForm = this.fb.group({
       userName: ["", Validators.required],
       password: ["", Validators.required],
     });
+
+    this.thisYear = new Date().getFullYear()
+    for (let firstYear = 2019; firstYear <= this.thisYear; firstYear++) {
+      this.listYears.push(firstYear)
+    }
   }
 
   signin() {
@@ -104,8 +113,8 @@ export class SigninComponent implements OnInit {
             ariaLabelledBy: "modal-basic-title ",
           })
           .result.then(
-            (result) => {},
-            (reason) => {}
+            (result) => { },
+            (reason) => { }
           );
       },
       (err: any) => {

@@ -1,10 +1,7 @@
-<div
-  class="card o-hidden"
-  [@animate]="{
+<div class="card o-hidden" [@animate]="{
     value: '*',
     params: { y: '120px', opacity: '0', delay: '100ms', duration: '400ms' }
-  }"
->
+  }">
   <div class="row">
     <div class="col-md-12">
       <div class="p-4">
@@ -20,37 +17,20 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="email">اسم المستخدم</label>
-                    <input
-                      id="email"
-                      class="form-control"
-                      formControlName="userName"
-                      type="email"
-                    />
+                    <input id="email" class="form-control" formControlName="userName" type="email" />
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="password">كلمة المرور</label>
-                    <input
-                      id="password"
-                      class="form-control"
-                      formControlName="password"
-                      type="password"
-                    />
+                    <input id="password" class="form-control" formControlName="password" type="password" />
                   </div>
                 </div>
                 <div class="col-md-12 mt-2">
-                  <btn-loading
-                    btnClass="btn-primary w-100"
-                    [loadingText]="loadingText"
-                    [loading]="loading"
-                  >
+                  <btn-loading btnClass="btn-primary w-100" [loadingText]="loadingText" [loading]="loading">
                     دخول
                   </btn-loading>
-                  <div
-                    *ngIf="errorMessage"
-                    class="alert alert-danger text-center mt-1"
-                  >
+                  <div *ngIf="errorMessage" class="alert alert-danger text-center mt-1">
                     اسم المستخدم او كلمة المرور خطأ
                   </div>
                 </div>
@@ -89,26 +69,20 @@
                 <div class="col-md-6">
                   <label>اختر السنة</label>
                   <select #year class="form-control">
-                    <option value="2019">2019</option>
-                    <option value="2020">2020</option>
-                    <option value="2021">2021</option>
-                    <option selected value="2022">2022</option>
+                    <option *ngFor="let year of listYears" [value]="year" [selected]="listYears[listYears.length - 1]">
+                      {{year}}</option>
                   </select>
                 </div>
                 <div class="col-md-12 mt-2 pt-1">
-                  <btn-loading
-                    [loadingText]="loadingTextGetEmployee"
-                    [loading]="loadingGetEmployee"
-                    btnClass="btn btn-outline-info w-100"
-                    (click)="
+                  <btn-loading [loadingText]="loadingTextGetEmployee" [loading]="loadingGetEmployee"
+                    btnClass="btn btn-outline-info w-100" (click)="
                       search(
                         jobNumber.value,
                         year.value,
                         month.value,
                         openModal
                       )
-                    "
-                  >
+                    ">
                     بحث
                   </btn-loading>
                 </div>
@@ -131,9 +105,8 @@
       </a>
     </div> -->
     <div class="col-md-6 p-2 d-flex align-items-center justify-content-center">
-      <a href="https://toc.oil.gov.iq/" target="_blank" class="text-dark"
-        >جميع الحقوق محفوظة لشركة نفط ذي قار {{ lastYear }}@</a
-      >
+      <a href="https://toc.oil.gov.iq/" target="_blank" class="text-dark">جميع الحقوق محفوظة لشركة نفط ذي قار {{
+        lastYear }}@</a>
     </div>
   </div>
 </div>
@@ -171,12 +144,7 @@
 
   <div class="modal-footer">
     <app-print [employee]="employeeInfo"></app-print>
-    <button
-      type="button"
-      aria-label="Close"
-      class="btn btn-white mr-auto"
-      (click)="modal.dismiss('Cross click')"
-    >
+    <button type="button" aria-label="Close" class="btn btn-white mr-auto" (click)="modal.dismiss('Cross click')">
       الغاء
     </button>
   </div>

@@ -310,6 +310,21 @@ export class NavigationService {
                     state: 'http://demos.ui-lib.com/gull-doc'
                 })
         }
+        else if (localStorage.getItem("roles") == '"audit"') {
+            this.defaultMenu.push({
+                name: 'الساعات الاضافية',
+                // description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+                type: 'dropDown',
+                icon: 'i-Bar-Chart',
+                sub: [
+                    { icon: 'i-Over-Time', name: 'تقارير التدقيق', state: '/dashboard/report-check', type: 'link' },
+                    // { icon: 'i-Clock-3', name: 'Version 1', state: '/dashboard/v1', type: 'link' },
+                    // { icon: 'i-Clock-4', name: 'Version 2', state: '/dashboard/v2', type: 'link' },
+                    // { icon: 'i-Over-Time', name: 'Version 3', state: '/dashboard/v3', type: 'link' },
+                    // { icon: 'i-Clock', name: 'Version 4', state: '/dashboard/v4', type: 'link' },
+                ]
+            })
+        }
     }
 
 
