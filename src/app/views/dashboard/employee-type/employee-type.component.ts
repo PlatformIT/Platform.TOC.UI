@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { ToastrService } from "ngx-toastr";
+import { EmployeeTypeService } from "src/app/shared/services/employee-type.service";
 import { UploadFileService } from "src/app/shared/services/upload-file.service";
 
 @Component({
@@ -20,12 +21,16 @@ export class EmployeeTypeComponent implements OnInit {
   resData: any;
   employeeId: any;
   showSearch: boolean = true;
+  addEmployeeTypeForm: FormGroup;
+  updateEmployeeTypeForm: FormGroup;
+  employee: any;
   constructor(
     private fb: FormBuilder,
     private modalService: NgbModal,
     private toastr: ToastrService,
-    private uploadFileService: UploadFileService
-  ) {}
+    private uploadFileService: UploadFileService,
+    private employeeTypeService: EmployeeTypeService
+  ) { }
 
   ngOnInit(): void {
     this.uploadFileForm = this.fb.group({
@@ -33,6 +38,7 @@ export class EmployeeTypeComponent implements OnInit {
       employeeTypeSelected: [1],
     });
     this.getAll();
+    this.buildAddEmployeeTypeForm()
   }
   getAll() {
     this.uploadFileService.getEmployeeType(this.page * 10 - 10).subscribe((res: any) => {
@@ -94,39 +100,82 @@ export class EmployeeTypeComponent implements OnInit {
         }
       );
   }
-  confirmDeleteEmployeef(confirmDeleteEmployee,employeeid){
+  confirmDeleteEmployeef(confirmDeleteEmployee, employeeid) {
     this.employeeId = employeeid;
     this.modalService
-    .open(confirmDeleteEmployee, { ariaLabelledBy: "modal-basic-title", centered: true })
-    .result.then(
-      (result) => {
-        this.confirmResut = `Closed with: ${result}`;
-      },
-      (reason) => {
-        this.confirmResut = `Dismissed with: ${reason}`;
-      }
-    );
+      .open(confirmDeleteEmployee, { ariaLabelledBy: "modal-basic-title", centered: true })
+      .result.then(
+        (result) => {
+          this.confirmResut = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.confirmResut = `Dismissed with: ${reason}`;
+        }
+      );
   }
   deleteAll() {
-    this.uploadFileService.deleteEmployeeType().subscribe((res:any) => {
+    this.uploadFileService.deleteEmployeeType().subscribe((res: any) => {
       this.toastr.success("تم حذف جميع البيانات")
       this.getAll();
     })
   }
-  searchEmployee(employeeId){
+  searchEmployee(employeeId) {
     this.employees = []
-    this.uploadFileService.getEmployeeTypeById(employeeId).subscribe((res:any) => {
+    this.uploadFileService.getEmployeeTypeById(employeeId).subscribe((res: any) => {
       res.data == null ? false : this.employees.push(res.data)
-     this.resData = res
+      this.resData = res
     }, err => {
       this.toastr.error("لم يتم جلب البيانات")
     })
   }
-  deleteEmployee(){
-    this.uploadFileService.deleteEmployee(this.employeeId).subscribe((res:any) =>{
+  deleteEmployee() {
+    this.uploadFileService.deleteEmployee(this.employeeId).subscribe((res: any) => {
       this.toastr.success("تم حذف البيانات")
+      this.getAll()
     }, err => {
       this.toastr.error("لم يتم الحذف")
+    })
+  }
+  buildAddEmployeeTypeForm() {
+    this.addEmployeeTypeForm = this.fb.group({
+      "employeeId": [],
+      "type": []
+    })
+
+    this.updateEmployeeTypeForm = this.fb.group({
+      typeEnum: []
+    })
+  }
+  addEmployeeType() {
+    this.employeeTypeService.addEmployeeType(this.addEmployeeTypeForm.value).subscribe((res: any) => {
+      this.toastr.success("تمت الاضافة")
+      this.modalService.dismissAll()
+      this.getAll()
+    }, err => {
+      this.toastr.error("لم تتم الاضافة")
+    })
+  }
+  updateModal(content, employee) {
+    this.employee = employee
+    this.updateEmployeeTypeForm.get('typeEnum').setValue(employee?.type)
+    this.modalService
+      .open(content, { ariaLabelledBy: "modal-basic-title", centered: true })
+      .result.then(
+        (result) => {
+          this.confirmResut = `Closed with: ${result}`;
+        },
+        (reason) => {
+          this.confirmResut = `Dismissed with: ${reason}`;
+        }
+      );
+  }
+  updateEmployeeType() {
+    this.employeeTypeService.updateEmployeeType(this.employee.id, this.updateEmployeeTypeForm.get('typeEnum').value).subscribe((res: any) => {
+      this.toastr.success("تم التعديل")
+      this.modalService.dismissAll()
+      this.getAll()
+    }, err => {
+      this.toastr.error("لم تتم الاضافة")
     })
   }
 }
