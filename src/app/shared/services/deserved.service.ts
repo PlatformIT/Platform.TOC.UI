@@ -6,7 +6,7 @@ import { Injectable } from "@angular/core";
 })
 export class DeservedService {
   baseUrl = "https://toc-api.theitplatform.app/api/";
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   uploadFile(data) {
     return this.http.post(this.baseUrl + "DeserveOvertime/uploadFile", data);
@@ -19,37 +19,37 @@ export class DeservedService {
   }
 
   getAllDoseNoteDesreve(data) {
-   if (localStorage.getItem("roles") == '"contract"') {
+    if (localStorage.getItem("roles") == '"contract"') {
       return this.http.get(
         this.baseUrl +
-          `Contracts/GetDoesNotDeserve?month=${data.month}&year=${data.year}`
+        `Contracts/GetDoesNotDeserve?month=${data.month}&year=${data.year}&departmentCode=${data.departmentCode}`
       );
     } else if (localStorage.getItem("roles") == '"assignment"') {
       return this.http.get(
         this.baseUrl +
-          `Assignments/GetDoesNotDeserve?month=${data.month}&year=${data.year}`
+        `Assignments/GetDoesNotDeserve?month=${data.month}&year=${data.year}&departmentCode=${data.departmentCode}`
       );
-    }else if (localStorage.getItem("roles") == '"admin"') {
+    } else if (localStorage.getItem("roles") == '"admin"') {
       return this.http.get(
         this.baseUrl +
-          `Employee/GetDoesNotDeserveByType?month=${data.month}&year=${data.year}&type=${data.type}`
+        `Employee/GetDoesNotDeserveByType?month=${data.month}&year=${data.year}&departmentCode=${data.departmentCode}&type=${data.type}`
       );
     }
   }
-  addDeserveEmployee(employeeId){
+  addDeserveEmployee(employeeId) {
     return this.http.post(this.baseUrl + "deserveOverTime/add?employeeId=" + employeeId, {})
   }
-  deleteDeserveEmployee(employeeId){
+  deleteDeserveEmployee(employeeId) {
     return this.http.delete(this.baseUrl + "deserveOverTime/delete?id=" + employeeId)
   }
-  
-  getEmployeeTypeById(employeeId){
+
+  getEmployeeTypeById(employeeId) {
     return this.http.get(this.baseUrl + `deserveOverTime/search?employeeId=${employeeId}`)
   }
-  getNotDeservedFile(){
+  getNotDeservedFile() {
     return this.http.get(
       this.baseUrl +
-        `DeserveOvertime/GetExcel`,
+      `DeserveOvertime/GetExcel`,
       { responseType: "blob" }
     );
   }

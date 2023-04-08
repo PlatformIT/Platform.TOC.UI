@@ -42,52 +42,33 @@
                 </option>
               </select>
             </div>
+            <div class="col-md-1">
+              <label>رمز القسم</label>
+              <input formControlName="departmentCode" class="form-control" />
+            </div>
             <div class="col-md-1 d-flex align-items-end">
               <button [disabled]="searchForm.invalid" class="btn btn-primary">
                 بحث
               </button>
             </div>
             <div class="col-md-5"></div>
-            <div
-              *ngIf="employees?.length > 0"
-              class="col-md-4 d-flex align-items-end justify-content-end"
-            >
-              <button
-                *ngIf="roles == 'admin'"
-                (click)="getAssignments()"
-                class="btn btn-outline-primary"
-              >
+            <div *ngIf="employees?.length > 0" class="col-md-4 d-flex align-items-end justify-content-end">
+              <button *ngIf="roles == 'admin'" (click)="getAssignments()" class="btn btn-outline-primary">
                 تحميل ملف الدائمين
               </button>
-              <button
-                *ngIf="roles == 'admin'"
-                (click)="getContracts()"
-                class="btn btn-outline-primary mx-1"
-              >
+              <button *ngIf="roles == 'admin'" (click)="getContracts()" class="btn btn-outline-primary mx-1">
                 تحميل ملف العقود
               </button>
-              <button
-                *ngIf="roles != 'contract'"
-                class="btn btn-outline-primary mx-1"
-                (click)="printComponent.printMenu(searchForm.value, 1)"
-                type="button"
-              >
+              <button *ngIf="roles != 'contract'" class="btn btn-outline-primary mx-1"
+                (click)="printComponent.printMenu(searchForm.value, 1)" type="button">
                 طباعة الدائمين
               </button>
-              <button
-                *ngIf="roles != 'assignment'"
-                class="btn btn-outline-primary mx-1"
-                (click)="printComponent.printMenu(searchForm.value, 2)"
-                type="button"
-              >
+              <button *ngIf="roles != 'assignment'" class="btn btn-outline-primary mx-1"
+                (click)="printComponent.printMenu(searchForm.value, 2)" type="button">
                 طباعة العقود
               </button>
-              <app-print
-                #printComponent
-                [employees]="employees"
-                [asignEmployees]="asignEmployees"
-                [contractEmployees]="contractEmployees"
-              ></app-print>
+              <app-print #printComponent [employees]="employees" [asignEmployees]="asignEmployees"
+                [contractEmployees]="contractEmployees"></app-print>
             </div>
           </div>
         </form>

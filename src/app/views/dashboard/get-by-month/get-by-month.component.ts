@@ -12,30 +12,31 @@ export class GetByMonthComponent implements OnInit {
   employees: any = [];
   asignEmployees: any = [];
   contractEmployees: any = [];
-  data:any = {}
+  data: any = {}
   roles: string;
 
-  listYears: number[]=[];
+  listYears: number[] = [];
   thisYear: number;
   constructor(
     private fb: FormBuilder,
     private uploadFileService: UploadFileService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.searchForm = this.fb.group({
       month: ["", Validators.required],
       year: ["", Validators.required],
+      departmentCode: [""]
     });
     this.roles = localStorage.getItem("roles").replace(/"/g, '')
-    
-    
-    
+
+
+
     this.thisYear = new Date().getFullYear()
     for (let firstYear = 2019; firstYear <= this.thisYear; firstYear++) {
       this.listYears.push(firstYear)
     }
-    
+
   }
   search() {
     this.employees = [];
@@ -74,7 +75,7 @@ export class GetByMonthComponent implements OnInit {
           link.remove();
         }, 100);
       },
-      (err: any) => {}
+      (err: any) => { }
     );
   }
   getContracts() {
@@ -105,7 +106,7 @@ export class GetByMonthComponent implements OnInit {
             link.remove();
           }, 100);
         },
-        (err: any) => {}
+        (err: any) => { }
       );
   }
 }

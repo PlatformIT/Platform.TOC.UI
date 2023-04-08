@@ -140,6 +140,28 @@
         </tr>
       </thead>
     </table>
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>التسلسل</th>
+              <th>التاريخ</th>
+              <th>وقت الدخول</th>
+              <th>وقت الخروج</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let date of employeeInfo?.days;let i = index">
+              <td>{{i + 1}}</td>
+              <td>{{date.date | date : "yyyy-MM-dd"}}</td>
+              <td>{{date.entryTime}}</td>
+              <td>{{date.exitTime}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
   <div class="modal-footer">
