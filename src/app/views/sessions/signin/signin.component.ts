@@ -86,6 +86,9 @@ export class SigninComponent implements OnInit {
         } else if (res.roles == "contract" || res.roles == "assignment") {
           this.router.navigateByUrl("/dashboard/getByMonth");
         }
+        else if (res.roles == "audit") {
+          this.router.navigateByUrl("/dashboard/report-check");
+        }
         this.navigationService.createMenu();
 
         this.store.setItem("isActive", true);
