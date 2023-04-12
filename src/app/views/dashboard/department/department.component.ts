@@ -15,7 +15,7 @@ export class DepartmentComponent implements OnInit {
   stafTypeForm: FormGroup;
   resData: any;
 
-  currentPage = 1;
+  currentPage = 0;
 
   pagination: any = {
     pageNo: 0,
@@ -127,7 +127,7 @@ export class DepartmentComponent implements OnInit {
       pageSize: this.pagination.pageSize,
     };
     this.departmentService.get(paginationQuery).subscribe((res: any) => {
-      this.resData = res.data;
+      this.resData = res;
     });
   }
   getList() {
@@ -150,7 +150,7 @@ export class DepartmentComponent implements OnInit {
     );
   }
   pageChange() {
-    this.pagination.pageNo = this.currentPage;
+    this.pagination.pageNo = (this.currentPage * 10) - 10;
     this.getAll();
   }
 

@@ -7,16 +7,10 @@
     </ul>
     <div class="mr-auto">
       <div class="row">
-        <button
-          class="btn ml-2 btn-outline-primary"
-          (click)="confirm(modalConfirm)"
-        >
+        <button class="btn ml-2 btn-outline-primary" (click)="confirm(modalConfirm)">
           حذف البيانات
         </button>
-        <button
-          class="btn ml-2 btn-outline-primary"
-          (click)="confirm(addEmployee)"
-        >
+        <button class="btn ml-2 btn-outline-primary" (click)="confirm(addEmployee)">
           اضافة موظف
         </button>
         <button (click)="getNotDeservedFile()" class="btn ml-2  btn-outline-primary">
@@ -38,12 +32,11 @@
           <div class="row">
             <div class="col-md-2">
               <label>اختر الفايل</label>
-              <input
-                (change)="uploadFileBtn($event)"
-                formControlName="file"
-                class="form-control"
-                type="file"
-              />
+              <input (change)="uploadFileBtn($event)" formControlName="file" class="form-control" type="file" />
+            </div>
+            <div class="col-md-2">
+              <label for="">اختر تاريخ البداية</label>
+              <input formControlName="startDate" class="form-control" type="date" />
             </div>
             <div class="col-md-1 d-flex align-items-end">
               <button class="btn btn-primary">رفع</button>
@@ -58,28 +51,16 @@
       <div class="card-header bg-primary">
         <div class="row">
           <div class="col-md-4">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="ادخل الرقم الوظيفي"
-              #employeeIdInput
-            />
+            <input type="text" class="form-control" placeholder="ادخل الرقم الوظيفي" #employeeIdInput />
           </div>
           <div class="col-md-2">
-            <button
-              *ngIf="showSearch"
-              (click)="
+            <button *ngIf="showSearch" (click)="
                 searchEmployee(employeeIdInput.value); showSearch = false
-              "
-              class="btn btn-secondary"
-            >
+              " class="btn btn-secondary">
               بحث
             </button>
-            <button
-              *ngIf="!showSearch"
-              (click)="employeeIdInput.value = ''; getAll(); showSearch = true"
-              class="btn btn-secondary"
-            >
+            <button *ngIf="!showSearch" (click)="employeeIdInput.value = ''; getAll(); showSearch = true"
+              class="btn btn-secondary">
               الغاء البحث
             </button>
           </div>
@@ -91,6 +72,7 @@
             <tr>
               <th>#</th>
               <th>الرقم الوظيفي</th>
+              <th>تاريخ البداية</th>
               <th>التفاصيل</th>
             </tr>
           </thead>
@@ -101,11 +83,9 @@
             <tr *ngFor="let employee of employees">
               <td>{{ employee?.id }}</td>
               <td>{{ employee?.employeeId }}</td>
+              <td>{{ employee?.startDate | date: "yyyy-MM-dd" }}</td>
               <td>
-                <button
-                  class="btn btn-danger"
-                  (click)="deleteEmployee(modalConfirmDelete, employee.id)"
-                >
+                <button class="btn btn-danger" (click)="deleteEmployee(modalConfirmDelete, employee.id)">
                   حذف
                 </button>
               </td>
@@ -123,11 +103,9 @@
   </div>
   <div class="modal-body">
     <p>
-      <strong
-        >هل انت متاكد من البيانات
+      <strong>هل انت متاكد من البيانات
         <span class="text-primary ml-1"> </span>
-        ؟</strong
-      >
+        ؟</strong>
     </p>
     <p>
       اذا كنت متاكد اضغط على
@@ -135,19 +113,10 @@
     </p>
   </div>
   <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-secondary btn"
-      (click)="modal.dismiss('cancel')"
-    >
+    <button type="button" class="btn btn-secondary btn" (click)="modal.dismiss('cancel')">
       الغاء
     </button>
-    <button
-      type="button"
-      ngbAutofocus
-      class="btn btn-danger btn ml-2"
-      (click)="deleteAll(); modal.dismiss('cancel')"
-    >
+    <button type="button" ngbAutofocus class="btn btn-danger btn ml-2" (click)="deleteAll(); modal.dismiss('cancel')">
       تاكيد
     </button>
   </div>
@@ -161,38 +130,23 @@
     <form #form>
       <div class="form-gorup">
         <label for="employeeId">الرقم الوظيفي</label>
-        <input
-          class="form-control"
-          type="text"
-          placeholder="11111"
-          #employeeId
-          [(ngModel)]="employeeData.employeeId"
-          name="employee"
-        />
+        <input class="form-control" type="text" #employeeId [(ngModel)]="employeeData.employeeId" name="employee" />
       </div>
-      <button
-        type="button"
-        class="btn btn-primary mt-2"
-        (click)="addNewEmployee(employeeId)"
-      >
+      <div class="form-gorup">
+        <label for="employeeId">تاريخ البداية</label>
+        <input class="form-control" type="date" #startDate [(ngModel)]="employeeData.startDate"
+          name="employeeStartDate" />
+      </div>
+      <button type="button" class="btn btn-primary mt-2" (click)="addNewEmployee(employeeId,startDate)">
         اضافة
       </button>
     </form>
   </div>
   <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-secondary btn"
-      (click)="modal.dismiss('cancel')"
-    >
+    <button type="button" class="btn btn-secondary btn" (click)="modal.dismiss('cancel')">
       الغاء
     </button>
-    <button
-      type="button"
-      ngbAutofocus
-      class="btn btn-danger btn ml-2"
-      (click)="deleteAll(); modal.dismiss('cancel')"
-    >
+    <button type="button" ngbAutofocus class="btn btn-danger btn ml-2" (click)="deleteAll(); modal.dismiss('cancel')">
       تاكيد
     </button>
   </div>
@@ -204,11 +158,9 @@
   </div>
   <div class="modal-body">
     <p>
-      <strong
-        >هل انت متاكد من عملية الحذف
+      <strong>هل انت متاكد من عملية الحذف
         <span class="text-primary ml-1"> </span>
-        ؟</strong
-      >
+        ؟</strong>
     </p>
     <p>
       اذا كنت متاكد اضغط على
@@ -216,19 +168,10 @@
     </p>
   </div>
   <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-secondary btn"
-      (click)="modal.dismiss('cancel')"
-    >
+    <button type="button" class="btn btn-secondary btn" (click)="modal.dismiss('cancel')">
       الغاء
     </button>
-    <button
-      type="button"
-      ngbAutofocus
-      class="btn btn-danger btn ml-2"
-      (click)="deleteOne(); modal.dismiss('cancel')"
-    >
+    <button type="button" ngbAutofocus class="btn btn-danger btn ml-2" (click)="deleteOne(); modal.dismiss('cancel')">
       تاكيد
     </button>
   </div>

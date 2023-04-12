@@ -32,11 +32,12 @@ export class DeserveOvertimeComponent implements OnInit {
     private modalService: NgbModal,
     private deservedService: DeservedService,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.uploadFileForm = this.fb.group({
       file: ["", Validators.required],
+      startDate: [""],
     });
     this.getAll();
   }
@@ -65,8 +66,7 @@ export class DeserveOvertimeComponent implements OnInit {
   uploadFile() {
     const fromData = new FormData();
     fromData.append("file", this.fileData);
-    console.log(fromData);
-    this.deservedService.uploadFile(fromData).subscribe(
+    this.deservedService.uploadFile(fromData, this.uploadFileForm.get('startDate')?.value).subscribe(
       (res: any) => {
         this.toastr.success("تم رفع الملف");
         this.getAll();
@@ -98,8 +98,8 @@ export class DeserveOvertimeComponent implements OnInit {
         }
       );
   }
-  addNewEmployee(employeeId: any) {
-    this.deservedService.addDeserveEmployee(employeeId.value).subscribe(
+  addNewEmployee(employeeId: any, startDate: any) {
+    this.deservedService.addDeserveEmployee(employeeId.value, startDate.value).subscribe(
       (res: any) => {
         this.toastr.success("تم اضافة موظف جديد");
         this.modalService.dismissAll();
@@ -111,7 +111,7 @@ export class DeserveOvertimeComponent implements OnInit {
       }
     );
   }
-  deleteEmployee(content,id) {
+  deleteEmployee(content, id) {
     this.employeeId = id;
     this.modalService
       .open(content, { ariaLabelledBy: "modal-basic-title", centered: true })
@@ -124,19 +124,19 @@ export class DeserveOvertimeComponent implements OnInit {
         }
       );
   }
-  deleteOne(){
-    this.deservedService.deleteDeserveEmployee(this.employeeId).subscribe((res:any) => {
+  deleteOne() {
+    this.deservedService.deleteDeserveEmployee(this.employeeId).subscribe((res: any) => {
       this.toastr.success("تم حذف الموظف")
       this.getAll();
     }, err => {
       this.toastr.error("لم يتم الحذف")
     })
   }
-  searchEmployee(employeeId){
+  searchEmployee(employeeId) {
     this.employees = []
-    this.deservedService.getEmployeeTypeById(employeeId).subscribe((res:any) => {
+    this.deservedService.getEmployeeTypeById(employeeId).subscribe((res: any) => {
       res.data == null ? false : this.employees.push(res.data)
-     this.resData = res
+      this.resData = res
     }, err => {
       this.toastr.error("لم يتم جلب البيانات")
     })
@@ -167,7 +167,7 @@ export class DeserveOvertimeComponent implements OnInit {
           link.remove();
         }, 100);
       },
-      (err: any) => {}
+      (err: any) => { }
     );
   }
 }

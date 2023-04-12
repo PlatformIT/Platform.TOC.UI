@@ -8,8 +8,8 @@ export class DeservedService {
   baseUrl = "https://toc-api.theitplatform.app/api/";
   constructor(private http: HttpClient) { }
 
-  uploadFile(data) {
-    return this.http.post(this.baseUrl + "DeserveOvertime/uploadFile", data);
+  uploadFile(data, startDate) {
+    return this.http.post(this.baseUrl + "DeserveOvertime/uploadFile?startDate=" + startDate, data);
   }
   getAll() {
     return this.http.get(this.baseUrl + "DeserveOvertime/GetAll");
@@ -36,8 +36,8 @@ export class DeservedService {
       );
     }
   }
-  addDeserveEmployee(employeeId) {
-    return this.http.post(this.baseUrl + "deserveOverTime/add?employeeId=" + employeeId, {})
+  addDeserveEmployee(employeeId, startDate) {
+    return this.http.post(this.baseUrl + "deserveOverTime/add?employeeId=" + employeeId + "&startDate=" + startDate, {})
   }
   deleteDeserveEmployee(employeeId) {
     return this.http.delete(this.baseUrl + "deserveOverTime/delete?id=" + employeeId)

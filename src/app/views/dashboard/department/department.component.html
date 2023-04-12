@@ -27,7 +27,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let stafType of resData; let i = index">
+                                <tr *ngFor="let stafType of resData?.data; let i = index">
                                     <td class="text-center">{{ (currentPage - 1 ) * 10 + i + 1 }}</td>
                                     <td class="text-center">{{ stafType.code }}</td>
                                     <td class="text-center">{{ stafType.name }}</td>
