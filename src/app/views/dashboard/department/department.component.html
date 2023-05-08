@@ -6,11 +6,14 @@
                     <div class="col-lg-3 ps-0">
                         <p class="nobleui-logo d-block mt-3"><b>الاقسام</b></p>
                     </div>
-                    <div class="col-lg-3 d-flex justify-content-end">
+                    <div class="col-lg-6 d-flex justify-content-end">
                         <div>
                             <button (click)="openStafTypeModal(stafTypeModal, 1)"
-                                class="btn btn-outline-primary btn-sm">
+                                class="btn btn-outline-primary btn-sm mx-1" style="margin-left: 4px !important;">
                                 اضافة قسم جديد
+                            </button>
+                            <button class="btn btn-sm btn-secondary px-3" (click)="openUploadFileModal(uploadFile)">
+                                رفع ملف
                             </button>
                         </div>
                     </div>
@@ -113,5 +116,53 @@
         <button type="button" class="btn" (click)="modal.close('by: close button')">
             اغلاق
         </button>
+    </div>
+</ng-template>
+
+
+<ng-template #uploadFile let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">رفع ملف</h5>
+        <button type="button" class="btn-close" (click)="modal.close('by: close icon')" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="w-100">
+                    <input (change)="getFile($event)" type="file" id="file-1"
+                        class="inputfile inputfile-1 text-center" />
+                    <label class="w-100 text-center" for="file-1"><span class="text-center"
+                            style="font-size: 16px">اختيار
+                            الملف</span></label>
+                </div>
+            </div>
+            <div class="col-md-12 mb-2">
+                <btn-loading [loading]="loadingFileWithoutSalary" btnClass="btn btn-primary w-100"
+                    (click)="uploadFileWithOutSalary()" [disabled]="fileToUpload == null">
+                    رفع الملف
+                </btn-loading>
+            </div>
+
+            <div *ngIf="fileToUpload != null" class="col-md-12">
+                <div class="progress">
+                    <div class="progress-bar bg-info" role="progressbar" [ngStyle]="{ width: progress + '%' }"
+                        attr.aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">
+                        {{ progress }}%
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 mt-1 text-left">
+                <span class="" *ngIf="fileToUpload != null">اسم الملف هو : {{ fileToUpload.name }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="../../../../assets/files_template/department template  (1).xlsx"
+            class="btn btn-outline-primary btn-sm mx-2" style="margin-left: 4px !important;">تحميل
+            نموذج</a>
+        <button type="button" class="btn btn-outline-secondary btn-sm" (click)="modal.close('by: close button')">
+            اغلاق
+        </button>
+        <!-- <button type="button" class="btn btn-primary" (click)="modal.close('by: save button')">Save changes</button> -->
     </div>
 </ng-template>

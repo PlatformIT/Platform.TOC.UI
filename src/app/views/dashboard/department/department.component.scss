@@ -1,0 +1,42 @@
+.inputfile+label {
+    /* 20px */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0.3rem 1rem;
+    font-size: 0.711375rem;
+    /* 10px 20px */
+}
+
+.no-js .inputfile+label {
+    display: none;
+    margin-bottom: 0;
+}
+
+.inputfile:focus+label,
+.inputfile.has-focus+label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+
+
+/* style 1 */
+.inputfile-1 {
+    display: none;
+    margin-bottom: 0 !important;
+}
+
+.inputfile-1+label {
+    color: #f1e5e6;
+    background-color: #434a70;
+    margin-bottom: 0 !important;
+    border-radius: 4px;
+}
+
+.inputfile-1:focus+label,
+.inputfile-1.has-focus+label,
+.inputfile-1+label:hover {
+    background-color: #343a58;
+}

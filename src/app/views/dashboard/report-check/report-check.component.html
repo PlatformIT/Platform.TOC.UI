@@ -15,26 +15,26 @@
                                 <form class="inline-form" [formGroup]="allEmployeeForm"
                                     (ngSubmit)="allEmployeeReport()">
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <ng-select class="py-0" formControlName="year" bindValue="code"
                                                 bindLabel="name" [items]="years" [searchable]="true"
                                                 placeholder="السنة">
                                             </ng-select>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <ng-select class="py-0" formControlName="month" bindValue="code"
                                                 bindLabel="name" [items]="months" [searchable]="true"
                                                 placeholder="الشهر">
                                             </ng-select>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-12 mt-2">
                                             <ng-select class="py-0" formControlName="departmentCode" bindValue="code"
                                                 bindLabel="name" [items]="departments" [searchable]="true"
-                                                placeholder="القسم">
+                                                [multiple]="true" [closeOnSelect]="false" placeholder="القسم">
                                             </ng-select>
                                         </div>
-                                        <div class="col-md-3">
-                                            <button class="btn btn-primary">سحب تقرير</button>
+                                        <div class="col-md-12 mt-2">
+                                            <button class="btn btn-primary w-100">سحب تقرير</button>
                                         </div>
                                     </div>
                                 </form>
@@ -50,26 +50,26 @@
                                 <form class="inline-form" [formGroup]="assignEmployeeForm"
                                     (ngSubmit)="assignEmployeeReport()">
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <ng-select class="py-0" formControlName="year" bindValue="code"
                                                 bindLabel="name" [items]="years" [searchable]="true"
                                                 placeholder="السنة">
                                             </ng-select>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <ng-select class="py-0" formControlName="month" bindValue="code"
                                                 bindLabel="name" [items]="months" [searchable]="true"
                                                 placeholder="الشهر">
                                             </ng-select>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-12 mt-2">
                                             <ng-select class="py-0" formControlName="departmentCode" bindValue="code"
                                                 bindLabel="name" [items]="departments" [searchable]="true"
-                                                placeholder="القسم">
+                                                [multiple]="true" [closeOnSelect]="false" placeholder="القسم">
                                             </ng-select>
                                         </div>
-                                        <div class="col-md-3">
-                                            <button class="btn btn-primary">سحب تقرير</button>
+                                        <div class="col-md-12 mt-2">
+                                            <button class="btn btn-primary w-100">سحب تقرير</button>
                                         </div>
                                     </div>
                                 </form>
@@ -85,26 +85,26 @@
                                 <form class="inline-form" [formGroup]="contractEmployeeForm"
                                     (ngSubmit)="contractEmployeeReport()">
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <ng-select class="py-0" formControlName="year" bindValue="code"
                                                 bindLabel="name" [items]="years" [searchable]="true"
                                                 placeholder="السنة">
                                             </ng-select>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <ng-select class="py-0" formControlName="month" bindValue="code"
                                                 bindLabel="name" [items]="months" [searchable]="true"
                                                 placeholder="الشهر">
                                             </ng-select>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-12 mt-2">
                                             <ng-select class="py-0" formControlName="departmentCode" bindValue="code"
                                                 bindLabel="name" [items]="departments" [searchable]="true"
-                                                placeholder="القسم">
+                                                [multiple]="true" [closeOnSelect]="false" placeholder="القسم">
                                             </ng-select>
                                         </div>
-                                        <div class="col-md-3">
-                                            <button class="btn btn-primary">سحب تقرير</button>
+                                        <div class="col-md-12 mt-2">
+                                            <button class="btn btn-primary w-100">سحب تقرير</button>
                                         </div>
                                     </div>
                                 </form>
@@ -120,26 +120,83 @@
                                 <form class="inline-form" [formGroup]="undifinedEmployeeForm"
                                     (ngSubmit)="undifinedEmployeeReport()">
                                     <div class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <ng-select class="py-0" formControlName="year" bindValue="code"
                                                 bindLabel="name" [items]="years" [searchable]="true"
                                                 placeholder="السنة">
                                             </ng-select>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-6">
                                             <ng-select class="py-0" formControlName="month" bindValue="code"
                                                 bindLabel="name" [items]="months" [searchable]="true"
                                                 placeholder="الشهر">
                                             </ng-select>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-12 mt-2">
                                             <ng-select class="py-0" formControlName="departmentCode" bindValue="code"
                                                 bindLabel="name" [items]="departments" [searchable]="true"
-                                                placeholder="القسم">
+                                                [multiple]="true" [closeOnSelect]="false" placeholder="القسم">
                                             </ng-select>
                                         </div>
-                                        <div class="col-md-3">
-                                            <button class="btn btn-primary">سحب تقرير</button>
+                                        <div class="col-md-12 mt-2">
+                                            <button class="btn btn-primary w-100">سحب تقرير</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title">
+                                    بحث سريع
+                                </div>
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">الرقم الوظيفي</label>
+                                                <input type="text" class="form-control" #jobNumber />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>اختر الشهر</label>
+                                            <select #month class="form-control">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>اختر السنة</label>
+                                            <select #year class="form-control">
+                                                <option *ngFor="let year of listYears" [value]="year"
+                                                    [selected]="listYears[listYears.length - 1]">
+                                                    {{year}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-12 mt-2 pt-1">
+                                            <btn-loading [loadingText]="loadingTextGetEmployee"
+                                                [loading]="loadingGetEmployee" btnClass="btn btn-primary w-100" (click)="
+                                            search(
+                                              jobNumber.value,
+                                              year.value,
+                                              month.value,
+                                              openModal
+                                            )
+                                          ">
+                                                بحث
+                                            </btn-loading>
                                         </div>
                                     </div>
                                 </form>
@@ -151,3 +208,67 @@
         </div>
     </div>
 </div>
+
+
+<!-- Modal اضافة و تعديل مستخدم -->
+<ng-template #openModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">معلومات الموظف</h4>
+    </div>
+    <div class="modal-body text-left">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>الاسم الكامل</th>
+                    <th>{{ employeeInfo?.name }}</th>
+                </tr>
+                <tr>
+                    <th>التاريخ</th>
+                    <th>{{ employeeInfo?.year }} - {{ employeeInfo?.month }}</th>
+                </tr>
+                <tr>
+                    <th>عدد الساعات</th>
+                    <th>{{ employeeInfo?.overTime }}</th>
+                </tr>
+                <tr>
+                    <th>نوع الموظف</th>
+                    <th>
+                        <span *ngIf="employeeInfo.type == 1">دائم</span>
+                        <span *ngIf="employeeInfo.type == 2">عقد</span>
+                    </th>
+                </tr>
+            </thead>
+        </table>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr class="text-center">
+                            <th>التسلسل</th>
+                            <th>التاريخ</th>
+                            <th>وقت الدخول</th>
+                            <th>وقت الخروج</th>
+                            <th>الوقت الاضافي</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center" *ngFor="let date of employeeInfo?.days;let i = index">
+                            <td>{{i + 1}}</td>
+                            <td>{{date.date | date : "yyyy-MM-dd"}}</td>
+                            <td>{{date.entryTime}}</td>
+                            <td>{{date.exitTime}}</td>
+                            <td>{{date.overtime}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <app-print [employee]="employeeInfo"></app-print>
+        <button type="button" aria-label="Close" class="btn btn-white mr-auto" (click)="modal.dismiss('Cross click')">
+            الغاء
+        </button>
+    </div>
+</ng-template>

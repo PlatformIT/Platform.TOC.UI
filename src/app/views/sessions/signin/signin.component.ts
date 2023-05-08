@@ -106,10 +106,6 @@ export class SigninComponent implements OnInit {
     this.auth.searchEmployeeInfo(jobNumber, year, month).subscribe(
       (res: any) => {
         this.employeeInfo = res.data
-
-
-
-
         this.loadingGetEmployee = false;
         this.modalService
           .open(content, {

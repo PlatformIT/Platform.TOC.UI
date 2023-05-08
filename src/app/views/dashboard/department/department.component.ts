@@ -1,3 +1,4 @@
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -29,6 +30,10 @@ export class DepartmentComponent implements OnInit {
   modelType: number;
   stafType: any;
   departments: any[] = [];
+  fileData: any;
+  fileToUpload: any;
+  loadingFileWithoutSalary: boolean;
+  progress: number;
 
   constructor(
     private modalService: NgbModal,
@@ -160,5 +165,43 @@ export class DepartmentComponent implements OnInit {
     //   fullname: this.filterForm.get("fullname")?.value,
     // };
     // this.getAll();
+  }
+  openUploadFileModal(content: TemplateRef<any>) {
+    this.modalService
+      .open(content, { centered: true, size: "sm" })
+      .result.then((result) => {
+        console.log("Modal closed" + result);
+      })
+      .catch((res) => { });
+  }
+  getFile(files: any) {
+    this.fileToUpload = files?.target?.files.item(0);
+  }
+  uploadFileWithOutSalary() {
+    this.loadingFileWithoutSalary = true;
+    this.departmentService
+      .uploadFile(this.fileToUpload)
+      .subscribe(
+        (res: any) => {
+          this.progress = 10;
+          if (res.type === HttpEventType.UploadProgress) {
+            this.progress = Math.round((100 * res.loaded) / res.total);
+          } else if (res instanceof HttpResponse) {
+            this.progress = 0;
+            if (res.type == 4 && res.status === 200) {
+              this.loadingFileWithoutSalary = false;
+              this.toastr.success("تم تحميل الملف بنجاح");
+              this.fileToUpload = null;
+              this.modalService.dismissAll();
+            }
+          }
+        },
+        (err: any) => {
+          this.toastr.error("لم يتم تحميل الملف");
+          this.fileToUpload = null;
+          this.loadingFileWithoutSalary = false;
+          this.progress = 0;
+        }
+      );
   }
 }

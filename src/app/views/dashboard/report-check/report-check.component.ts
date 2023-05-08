@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { DepartmentService } from 'src/app/shared/services/department.service';
 import { ReportCheckService } from 'src/app/shared/services/report-check.service';
 
@@ -20,11 +22,17 @@ export class ReportCheckComponent implements OnInit {
   months: any[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
   departments: any[] = [];
   thisYear: number;
+  loadingGetEmployee: boolean;
+  loadingTextGetEmployee: string;
+  employeeInfo: any;
+  lastYear: number;
+  listYears: any[] = [];
   constructor(private fb: FormBuilder,
     private reportService: ReportCheckService,
     private departmentService: DepartmentService,
-    private toastr: ToastrService
-
+    private toastr: ToastrService,
+    private auth: AuthService,
+    private modalService: NgbModal
   ) {
 
     this.allEmployeeForm = this.fb.group({
@@ -50,11 +58,18 @@ export class ReportCheckComponent implements OnInit {
 
   }
   ngOnInit(): void {
+
+    let date = new Date();
+    this.lastYear = date.getFullYear();
     this.departmenttList()
 
     this.thisYear = new Date().getFullYear()
     for (let firstYear = 2019; firstYear <= this.thisYear; firstYear++) {
       this.years.push(firstYear)
+    }
+    this.thisYear = new Date().getFullYear()
+    for (let firstYear = 2019; firstYear <= this.thisYear; firstYear++) {
+      this.listYears.push(firstYear)
     }
   }
   departmenttList() {
@@ -91,6 +106,7 @@ export class ReportCheckComponent implements OnInit {
     }, err => {
       this.toastr.error("لم يتم تحميل الملف");
     })
+
   }
   assignEmployeeReport() {
     this.reportService.getAssignmentsFile(this.assignEmployeeForm.value).subscribe((res: any) => {
@@ -181,5 +197,28 @@ export class ReportCheckComponent implements OnInit {
     }, err => {
       this.toastr.error("لم يتم تحميل الملف");
     })
+  }
+
+  search(jobNumber, year, month, content) {
+    this.loadingGetEmployee = true;
+    this.loadingTextGetEmployee = "جاري البحث";
+    this.auth.searchEmployeeInfo(jobNumber, year, month).subscribe(
+      (res: any) => {
+        this.employeeInfo = res.data
+        this.loadingGetEmployee = false;
+        this.modalService
+          .open(content, {
+            ariaLabelledBy: "modal-basic-title ",
+          })
+          .result.then(
+            (result) => { },
+            (reason) => { }
+          );
+      },
+      (err: any) => {
+        this.loadingGetEmployee = false;
+        this.toastr.error("لا توجد بيانات");
+      }
+    );
   }
 }
