@@ -12,15 +12,18 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class UserComponent implements OnInit {
   userForm: FormGroup;
   users: any = [];
-  user:any;
+  user: any;
   confirmResut: string;
   loading: boolean;
   title: string;
   typeMethod: any;
   start: any = 0;
   take: any = 10;
-  constructor( private userService: UserService,
-   private fb: FormBuilder,
+  page = 1;
+  pageSize = 10;
+  resData: any;
+  constructor(private userService: UserService,
+    private fb: FormBuilder,
     private modalService: NgbModal,
     private toastr: ToastrService) { }
 
@@ -38,16 +41,14 @@ export class UserComponent implements OnInit {
     });
   }
   get() {
-    let data = { 
-      start: this.start,
+    let data = {
+      start: this.page * 10 - 10,
       take: this.take
     }
-    
+
     this.userService.get(data).subscribe((res: any) => {
       this.users = res.data;
-      console.log('====================================');
-      console.log(this.users);
-      console.log('====================================');
+      this.resData = res
     });
   }
   open(content, type, element?) {
@@ -67,14 +68,14 @@ export class UserComponent implements OnInit {
         roles: element.roles,
       })
     }
-    
+
     this.modalService
       .open(content, {
         ariaLabelledBy: "modal-basic-title ",
       })
       .result.then(
-        (result) => {},
-        (reason) => {}
+        (result) => { },
+        (reason) => { }
       );
   }
   confirm(content, element) {
@@ -107,11 +108,11 @@ export class UserComponent implements OnInit {
       );
     } else {
       console.log(this.user);
-      
-      this.userService.update(this.userForm.value,this.user.id).subscribe(
+
+      this.userService.update(this.userForm.value, this.user.id).subscribe(
         (res: any) => {
           console.log("res", res);
-          
+
           this.toastr.success("تم التعديل بنجاح");
           this.get();
           this.modalService.dismissAll();
@@ -119,7 +120,7 @@ export class UserComponent implements OnInit {
         },
         (err) => {
           console.log(err);
-          
+
           this.toastr.error("عذرا هناك خطأ ما");
           this.loading = false;
         }
