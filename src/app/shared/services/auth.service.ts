@@ -12,7 +12,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 export class AuthService {
   //Only for demo purpose
   authenticated = true;
-  baseUrl = "https://toc-api.theitplatform.app/api/";
+  baseUrl = environment.baseUrl;
   constructor(
     private store: LocalStoreService,
     private router: Router,
@@ -21,7 +21,7 @@ export class AuthService {
     this.checkAuth();
   }
 
-  checkAuth() {}
+  checkAuth() { }
 
   getuser() {
     return of({});
@@ -41,7 +41,7 @@ export class AuthService {
     // location.reload();
   }
 
-  searchEmployeeInfo(number, year, month){
-    return this.http.get(this.baseUrl + `employee/get?employeeId=${number}&month=${month}&year=${year}`)
+  searchEmployeeInfo(number, year, month) {
+    return this.http.get(this.baseUrl + `/api/employee/get?employeeId=${number}&month=${month}&year=${year}`)
   }
 }

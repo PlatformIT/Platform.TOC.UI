@@ -1,11 +1,12 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { environment } from "src/environments/environment";
 
 @Injectable({
   providedIn: "root",
 })
 export class UserService {
-  baseUrl = "https://toc-api.theitplatform.app/api/";
+  baseUrl = environment.baseUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -16,7 +17,7 @@ export class UserService {
   get(pagination: any) {
     return this.http.get(
       this.baseUrl +
-      "Users?Start=" +
+      "/api/Users?Start=" +
       pagination.start +
       "&Take=" +
       pagination.take
@@ -26,14 +27,14 @@ export class UserService {
   getById() { }
 
   update(data: any, id: any) {
-    return this.http.put(this.baseUrl + "Users/" + id, data);
+    return this.http.put(this.baseUrl + "/api/Users/" + id, data);
   }
 
   delete(id: any) {
-    return this.http.delete(this.baseUrl + "Users/" + id);
+    return this.http.delete(this.baseUrl + "/api/Users/" + id);
   }
 
   changePassword(data: any, id: any) {
-    return this.http.post(this.baseUrl + "Users/" + id, data);
+    return this.http.post(this.baseUrl + "/api/Users/" + id, data);
   }
 }
