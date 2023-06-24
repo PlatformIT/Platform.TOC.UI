@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
-  selector: "app-print",
+  selector: "print-employee-info",
   templateUrl: "./print.component.html",
   styleUrls: ["./print.component.scss"],
 })
-export class PrintComponent implements OnInit {
+export class PrintEmployeeInfoComponent implements OnInit {
   @Input() employee: any = {};
   @Input() employeeInfo: any = {};
   date: any;

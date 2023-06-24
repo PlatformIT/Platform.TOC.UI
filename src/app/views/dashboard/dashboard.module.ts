@@ -25,6 +25,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { DepartmentComponent } from './department/department.component';
 import { ReportCheckComponent } from './report-check/report-check.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { PrintEmployeeInfoComponent } from './print-employee-info/print.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -38,6 +39,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
     NgxPaginationModule,
     NgSelectModule,
   ],
-  declarations: [DashboadDefaultComponent, DashboardV2Component, DashboardV3Component, DashboardV4Component, UploadFileComponent, GetByMonthComponent, ReportsComponent, PrintComponent, EmployeeComponent, UserComponent, DeserveOvertimeComponent, DoseNotDeservedComponent, PrintNotDesComponent, EmployeeTypeComponent, DepartmentComponent, ReportCheckComponent]
+  declarations: [PrintEmployeeInfoComponent, DashboadDefaultComponent, DashboardV2Component, DashboardV3Component, DashboardV4Component, UploadFileComponent, GetByMonthComponent, ReportsComponent, PrintComponent, EmployeeComponent, UserComponent, DeserveOvertimeComponent, DoseNotDeservedComponent, PrintNotDesComponent, EmployeeTypeComponent, DepartmentComponent, ReportCheckComponent]
 })
 export class DashboardModule { }
