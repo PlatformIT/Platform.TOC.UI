@@ -29,7 +29,7 @@ export class AuthService {
 
   signin(credentials) {
     return this.http.post(
-      this.baseUrl + "auth/token",
+      this.baseUrl + "/api/auth/token",
       credentials
     );
   }
