@@ -11,7 +11,7 @@ export class UploadFileService {
   constructor(private htpp: HttpClient) { }
 
   uploadFile(data) {
-    return this.htpp.post(this.baseUrl + "Overtime", data);
+    return this.htpp.post(this.baseUrl + "/api/Overtime", data);
   }
   getBymonth(data) {
     if (localStorage.getItem("roles") == '"admin"') {
